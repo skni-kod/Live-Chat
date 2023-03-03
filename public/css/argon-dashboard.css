@@ -21414,8 +21414,8 @@ fieldset:disabled .btn {
 .fixed-plugin .card {
   position: fixed !important;
   right: -360px;
-  top: 0;
-  height: 100%;
+  bottom: 0;
+  /*height: 300px;*/
   left: auto !important;
   transform: unset !important;
   width: 360px;

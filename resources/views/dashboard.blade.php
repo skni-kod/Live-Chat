@@ -95,25 +95,32 @@
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-info text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
+                    <span class="nav-link-text ms-1 ">Sign Up</span>
                 </a>
             </li>
         </ul>
     </div>
+
     <div class="sidenav-footer mx-3 ">
-        <div class="card card-plain shadow-none" id="sidenavCard">
-            <img class="w-50 mx-auto" src="{{asset('img/illustrations/icon-documentation.svg')}}" alt="sidebar_illustration">
-            <div class="card-body text-center p-3 w-100 pt-0">
-                <div class="docs-info">
-                    <h6 class="mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-                </div>
+        <hr class="horizontal dark my-sm">
+        <!--- Blokuje tymaczasowo dopóki zaznaczone odbieranie nowych czatów, coś w stylu jestem aktualnie nieaktywny ---->
+        <div class="mt-2 mb-3 d-flex">
+            <span class="nav-link-text ms-1">Jestem na przerwie</span>
+            <div class="form-check form-switch ps-0 ms-auto my-auto">
+                <input class="form-check-input mt-1 ms-auto" type="checkbox">
             </div>
         </div>
-        <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard" target="_blank" class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
-        <a class="btn btn-primary btn-sm mb-0 w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+
+        <!--- Dopóki zaznaczone będa przychodzić nowe czaty ---->
+        <div class="mb-5 d-flex">
+            <span class="nav-link-text ms-1">Gotowy do pomocy</span>
+            <div class="form-check form-switch ps-0 ms-auto my-auto">
+                <input class="form-check-input mt-1 ms-auto" type="checkbox">
+            </div>
+        </div>
     </div>
 </aside>
+
 <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -539,12 +546,10 @@
                             © <script>
                                 document.write(new Date().getFullYear())
                             </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                            for a better web.
+                            <a href="#" class="font-weight-bold" target="_blank">SKNI KOD</a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                             <li class="nav-item">
                                 <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
@@ -559,82 +564,79 @@
                                 <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </footer>
     </div>
 </main>
 
+
 <!-- LiveChat Activation-Tool --->
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="ni ni-chat-round py-2"> </i>
     </a>
-    <div class="card shadow-lg">
-        <div class="card-header pb-0 pt-3 ">
-            <div class="float-start">
-                <h5 class="mt-3 mb-0">Argon Configurator</h5>
-                <p>See our dashboard options.</p>
+    
+    <div class="card border shadow-lg">
+        <div class="card-header  pb-0 px-3">
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col-auto">
+                    <div class="icon icon-shape bg-gradient-primary shadow-danger text-center rounded-circle">
+                        <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="col">
+                    <span><b>Imie Nazwisko</b></span>
+                        <div class="stats">
+                            <small>Krótki opis</small>
+                        </div>
+                </div>
+                <div class="col-auto text-right">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="fa fa-close"></i>
+                    </button>                
+                </div>
             </div>
-            <div class="float-end mt-4">
-                <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                    <i class="fa fa-close"></i>
-                </button>
-            </div>
-            <!-- End Toggle Button -->
         </div>
-        <hr class="horizontal dark my-1">
+        <div class="card-body border p-3 ">
+                <ul class="list-group">
+                    <!--- card card-body border card-plain border-radius-lg d-flex align-items-center flex-row -->
+                    <li class="list-group-item border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                    <div class="d-flex flex-column">
+                            <h6 class="mb-2 text-sm">Ty</h6>
+                            <span class="mb-2 text-xs">Wiadomość 1</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                        <div class="d-flex flex-column">
+                            <h6 class="mb-2 text-sm">Osoba 1</h6>
+                            <span class="mb-2 text-xs">Wiadomość 2</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                        <div class="d-flex flex-column">
+                            <h6 class="mb-2 text-sm">Ty</h6>
+                            <span class="mb-2 text-xs">Wiadomość 3</span>
+                        </div>
+                    </li>
+                </ul>
+        </div>
+
         <div class="card-body pt-sm-3 pt-0 overflow-auto">
-            <!-- Sidebar Backgrounds -->
-            <div>
-                <h6 class="mb-0">Sidebar Colors</h6>
-            </div>
-            <a href="javascript:void(0)" class="switch-trigger background-color">
-                <div class="badge-colors my-2 text-start">
-                    <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-                    <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-                </div>
-            </a>
-            <!-- Sidenav Type -->
-            <div class="mt-3">
-                <h6 class="mb-0">Sidenav Type</h6>
-                <p class="text-sm">Choose between 2 different sidenav types.</p>
-            </div>
-            <div class="d-flex">
-                <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-                <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
-            </div>
-            <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-            <!-- Navbar Fixed -->
-            <div class="d-flex my-3">
-                <h6 class="mb-0">Navbar Fixed</h6>
-                <div class="form-check form-switch ps-0 ms-auto my-auto">
-                    <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-                </div>
-            </div>
-            <hr class="horizontal dark my-sm-4">
-            <div class="mt-2 mb-5 d-flex">
-                <h6 class="mb-0">Light / Dark</h6>
-                <div class="form-check form-switch ps-0 ms-auto my-auto">
-                    <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-                </div>
-            </div>
-            <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free Download</a>
-            <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard">View documentation</a>
+            <!--- Start Chat Input --->
             <div class="w-100 text-center">
-                <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-                <h6 class="mt-3">Thank you for sharing!</h6>
-                <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-                    <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-                </a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
-                    <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-                </a>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
+                        <i class="ni ni-send" aria-hidden="true"></i> 
+                    </button>
+                </div>
+            </div>
+            <!--- End Chat Input --->
+            <div class="d-flex">
+                <button class="btn bg-gradient-danger w-100 px-3 mb-2">Zakończ czat</button>
             </div>
         </div>
     </div>
