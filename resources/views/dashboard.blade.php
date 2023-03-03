@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}">
-    
+
     <title>Dashboard</title>
 
     <!--     Fonts and icons     -->
@@ -285,37 +285,34 @@
                     </div>
                 </div>
             </div>
-            
             <div class="col-lg-4 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="d-inline-flex p-2">
-                                <div class="col-6 col-md-4">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Client Satisfaction</p>
-                                        <h5 class="font-weight-bolder">
-                                            $53,000
-                                        </h5>
-                                    </div>
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Client Satisfaction</p>
+                                    <h5 class="font-weight-bolder">
+                                        $53,000
+                                    </h5>
                                 </div>
-                                <div class="col-8 text-end">
-                                    <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                        <i class="ni ni-satisfied text-lg opacity-10" aria-hidden="true"></i>
-                                    </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-satisfied text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <p class="mb-0">
-                                <div class="progress-wrapper">
-                                    <div class="progress-info">
-                                        <div class="progress-percentage">
-                                                <span class="text-sm font-weight-bold">35% positive</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%;"></div>
+                            <div class="progress-wrapper">
+                                <div class="progress-info">
+                                    <div class="progress-percentage">
+                                        <span class="text-sm font-weight-bold">35% positive</span>
                                     </div>
                                 </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%;"></div>
+                                </div>
+                            </div>
                             </p>
                         </div>
                     </div>
@@ -340,7 +337,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -370,7 +367,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -400,7 +397,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -432,7 +429,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -462,7 +459,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -492,7 +489,7 @@
                             <p class="mb-0">
                                 <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
                                     Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
                             </p>
                         </div>
                     </div>
@@ -511,9 +508,9 @@
                 </div>
             </div>
 
-            
+
         </div>
-       
+
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -533,7 +530,7 @@
                 </li>
             </ul>
         </nav>
-        
+
         <footer class="footer pt-3  ">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-lg-between">
