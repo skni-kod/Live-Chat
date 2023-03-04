@@ -21,7 +21,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}">
 
-    <title>Dashboard</title>
+    <title>LiveChat | Dashboard</title>
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -39,7 +39,7 @@
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+        <a class="navbar-brand m-0" href="#" target="_blank">
             <img src="{{asset('img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">LiveChat</span>
         </a>
@@ -591,7 +591,7 @@
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="ni ni-chat-round py-2"> </i>
     </a>
-    
+
     <div class="card border shadow-lg">
         <div class="card-header  pb-0 px-3">
         <div class="container">
@@ -610,7 +610,7 @@
                 <div class="col-auto text-right">
                     <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                         <i class="fa fa-close"></i>
-                    </button>                
+                    </button>
                 </div>
             </div>
         </div>
@@ -644,7 +644,7 @@
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
-                        <i class="ni ni-send" aria-hidden="true"></i> 
+                        <i class="ni ni-send" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
