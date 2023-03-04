@@ -9,7 +9,13 @@ class Profile extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'avatar'];
+    protected $table = 'profiles';
+
+    protected $fillable = [ 'name',
+                            'email',
+                            'avatar',
+                            'user_id'
+    ];
 
     public function __construct(array $attributes = [])
     {
