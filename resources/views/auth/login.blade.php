@@ -11,7 +11,7 @@
                 <form role="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="mb-3">
-                        <input name="login" type="text" class="form-control form-control-lg @error('login') is-invalid @enderror" placeholder="Email" aria-label="Email" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                        <input name="login" type="text" class="form-control form-control-lg @error('login') is-invalid @enderror" placeholder="Email/Login" aria-label="Email" value="{{ old('login') }}" required autocomplete="login" autofocus>
                         @error('login')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
