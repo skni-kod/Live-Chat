@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -27,6 +28,11 @@ class NewChatMessage implements ShouldBroadcast
     {
         $this->message = $message;
         $this->user = $user;
+        $message = Message::createMessage(
+            $user,
+            1,
+            1
+        );
     }
 
     /**
@@ -36,6 +42,11 @@ class NewChatMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chat');
+        return ['chat'];
+    }
+
+    public function broadcastAs()
+    {
+        return 'NewChatMessage';
     }
 }

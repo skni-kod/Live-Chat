@@ -27,8 +27,8 @@ var pusher = new Pusher('14a762b397f82fe9ae04', {
 });
 
 var channel = pusher.subscribe('chat');
-channel.trigger('client-WebsocketEvent', { message: "dziala" });
-channel.bind('WebsocketEvent', function(data) {
+//channel.trigger('client-WebsocketEvent', { message: "dziala" });
+channel.bind('NewChatMessage', function(data) {
+    console.log("dostalem");
     alert(JSON.stringify(data));
-    channel.trigger('client-message', { message: "dziala" });
 });

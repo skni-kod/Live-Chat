@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->string('members', 100);
+            $table->string('visitor_id')->nullable();
+            $table->foreign('visitor_id')->references('visitor_id')->on('visitors')->onDelete('set null');
+            $table->bigInteger('agent_id')->unsigned()->nullable();
+            $table->foreign('agent_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('status', 20);
             $table->timestamps();
         });

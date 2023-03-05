@@ -16,8 +16,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('conversation_id');
             $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('agent_id')->nullable();
+            $table->foreign('agent_id')->references('id')->on('users')->onDelete('set null');
+            $table->string('visitor_id')->nullable();
+            $table->foreign('visitor_id')->references('visitor_id')->on('visitors')->onDelete('set null');
             $table->text('message');
             $table->timestamp('sent_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('read_at')->nullable()->default(null);
