@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Websockets;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,7 @@ use App\Http\Controllers\Websockets;
 Route::get('/', function () {
     return view('auth\login');
 });
+
 
 Auth::routes();
 
