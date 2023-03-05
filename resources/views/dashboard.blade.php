@@ -32,6 +32,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+    @vite(['resources/js/app.js'])
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -594,31 +595,31 @@
 
     <div class="card border shadow-lg">
         <div class="card-header  pb-0 px-3">
-        <div class="container">
-            <div class="row align-items-start">
-                <div class="col-auto">
-                    <div class="icon icon-shape bg-gradient-primary shadow-danger text-center rounded-circle">
-                        <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-gradient-primary shadow-danger text-center rounded-circle">
+                            <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span><b>Imie Nazwisko</b></span>
+                            <div class="stats">
+                                <small>Krótki opis</small>
+                            </div>
+                    </div>
+                    <div class="col-auto text-right">
+                        <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                            <i class="fa fa-close"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="col">
-                    <span><b>Imie Nazwisko</b></span>
-                        <div class="stats">
-                            <small>Krótki opis</small>
-                        </div>
-                </div>
-                <div class="col-auto text-right">
-                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
             </div>
-        </div>
-        <div class="card-body border p-3 ">
+            <div class="card-body border p-3 ">
                 <ul class="list-group">
                     <!--- card card-body border card-plain border-radius-lg d-flex align-items-center flex-row -->
                     <li class="list-group-item border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-column">
                             <h6 class="mb-2 text-sm">Ty</h6>
                             <span class="mb-2 text-xs">Wiadomość 1</span>
                         </div>
@@ -636,114 +637,35 @@
                         </div>
                     </li>
                 </ul>
-        </div>
-
-        <div class="card-body pt-sm-3 pt-0 overflow-auto">
-            <!--- Start Chat Input --->
-            <div class="w-100 text-center">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
-                        <i class="ni ni-send" aria-hidden="true"></i>
-                    </button>
-                </div>
             </div>
-            <!--- End Chat Input --->
-            <div class="d-flex">
-                <button class="btn bg-gradient-danger w-100 px-3 mb-2">Zakończ czat</button>
+
+            <div class="card-body pt-sm-3 pt-0 overflow-auto">
+                <!--- Start Chat Input --->
+                <div class="w-100 text-center">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
+                            <i class="ni ni-send" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--- End Chat Input --->
+                <div class="d-flex">
+                    <button class="btn bg-gradient-danger w-100 px-3 mb-2">Zakończ czat</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!--   Core JS Files   -->
 <script src="{{asset('js/core/popper.min.js')}}"></script>
 <script src="{{asset('js/core/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/plugins/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('js/plugins/smooth-scrollbar.min.js')}}"></script>
 <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
-<script>
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
+<script src="{{asset('js/websocket.js')}}"></script>
 
-    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-    new Chart(ctx1, {
-        type: "line",
-        data: {
-            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [{
-                label: "Mobile apps",
-                tension: 0.4,
-                borderWidth: 0,
-                pointRadius: 0,
-                borderColor: "#5e72e4",
-                backgroundColor: gradientStroke1,
-                borderWidth: 3,
-                fill: true,
-                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                maxBarThickness: 6
-
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                }
-            },
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    grid: {
-                        drawBorder: false,
-                        display: true,
-                        drawOnChartArea: true,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        padding: 10,
-                        color: '#fbfbfb',
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-                x: {
-                    grid: {
-                        drawBorder: false,
-                        display: false,
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        borderDash: [5, 5]
-                    },
-                    ticks: {
-                        display: true,
-                        color: '#ccc',
-                        padding: 20,
-                        font: {
-                            size: 11,
-                            family: "Open Sans",
-                            style: 'normal',
-                            lineHeight: 2
-                        },
-                    }
-                },
-            },
-        },
-    });
-</script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

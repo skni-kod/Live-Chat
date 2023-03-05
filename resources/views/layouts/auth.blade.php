@@ -33,7 +33,6 @@
     <link href="{{asset('css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
-    @vite(['resources/js/app.js'])
 </head>
 
 <body class="">
