@@ -21413,12 +21413,12 @@ fieldset:disabled .btn {
 
 .fixed-plugin .card {
   position: fixed !important;
-  right: -360px;
+  right: -400px;
   bottom: 0;
   /*height: 300px;*/
   left: auto !important;
   transform: unset !important;
-  width: 360px;
+  width: 400px;
   border-radius: 0;
   padding: 0 10px;
   transition: .2s ease;
