@@ -21413,16 +21413,30 @@ fieldset:disabled .btn {
 
 .fixed-plugin .card {
   position: fixed !important;
-  right: -400px;
+  right: -50%;
   bottom: 0;
   /*height: 300px;*/
   left: auto !important;
   transform: unset !important;
-  width: 400px;
+  width: 50%;
   border-radius: 0;
   padding: 0 10px;
   transition: .2s ease;
   z-index: 1020;
+}
+
+@media (max-width: 1200px) {
+    .fixed-plugin .card {
+        width: 100%;
+        right: 0;
+    }
+}
+
+@media (min-width: 1199px) {
+    .fixed-plugin .card {
+        width: 50%;
+        right: -50%;
+    }
 }
 
 .fixed-plugin .badge {

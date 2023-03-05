@@ -32,6 +32,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+
     @vite(['resources/js/app.js'])
 </head>
 
@@ -133,20 +134,21 @@
                 </ol>
                 <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
             </nav>
-            <li class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
-                <ul class="navbar-nav  justify-content-end">
+                <ul class="navbar-nav justify-content-end">
+
                     <li class="nav-item d-flex align-items-center dropdown">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="javascript:;" class="nav-link text-white p-0" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user me-sm-1"></i>
                             <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
                         </a>
-                        <ul class="dropdown-menu show" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 43px);" data-popper-placement="bottom-start">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 43px);" data-popper-placement="bottom-start">
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -174,79 +176,6 @@
                         <a href="javascript:;" class="nav-link text-white p-0">
                             <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                         </a>
-                    </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell cursor-pointer"></i>
-                        </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                            <li class="mb-2">
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="my-auto">
-                                            <img src="{{asset('img/team-2.jpg')}}" class="avatar avatar-sm  me-3 ">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                <span class="font-weight-bold">New message</span> from Laur
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                13 minutes ago
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="my-auto">
-                                            <img src="{{asset('img/small-logos/logo-spotify.svg')}}" class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                <span class="font-weight-bold">New album</span> by Travis Scott
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                1 day
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item border-radius-md" href="javascript:;">
-                                    <div class="d-flex py-1">
-                                        <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                                            <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <title>credit-card</title>
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                                        <g transform="translate(1716.000000, 291.000000)">
-                                                            <g transform="translate(453.000000, 454.000000)">
-                                                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="text-sm font-weight-normal mb-1">
-                                                Payment successfully completed
-                                            </h6>
-                                            <p class="text-xs text-secondary mb-0">
-                                                <i class="fa fa-clock me-1"></i>
-                                                2 days
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
             </div>
@@ -335,7 +264,6 @@
                                     <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%;"></div>
                                 </div>
                             </div>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -347,8 +275,9 @@
 
 
         <!--- Sekcja aktualnych chatów ---->
-        <div class="row mt-6">
-            <div class="col-lg-4 mb-lg-0 mb-4">
+        <div class="row mt-7">
+            <div class="col-lg-4 mb-lg-0 mb-4 mt-2">
+
                 <div class="card">
                     <div class="card-body p-4">
                         <div class="numbers">
@@ -365,16 +294,16 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -395,16 +324,16 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -425,16 +354,16 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -457,16 +386,16 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -487,16 +416,16 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -517,20 +446,18 @@
                     </div>
 
                     <div class="d-flex justify-content-center mb-3">
-                            <div class="p-2">
-                                <button type="button" class="btn btn-default">Zajme się tym!</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-success">Zakończ</button>
-                            </div>
-                            <div class="p-2">
-                                <button type="button" class="btn btn-danger">Zablokuj</button>
-                            </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-default">Zajme się tym!</button>
                         </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-success">Zakończ</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
 
         <nav aria-label="Page navigation example">
@@ -570,8 +497,6 @@
     </div>
 </main>
 
-
-<!-- LiveChat Activation-Tool --->
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="ni ni-chat-round py-2"> </i>
@@ -588,9 +513,9 @@
                     </div>
                     <div class="col">
                         <span><b>Imie Nazwisko</b></span>
-                            <div class="stats">
-                                <small>Krótki opis</small>
-                            </div>
+                        <div class="stats">
+                            <small>Krótki opis</small>
+                        </div>
                     </div>
                     <div class="col-auto text-right">
                         <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -599,48 +524,70 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body border p-3 ">
-                <ul class="list-group">
-                    <!--- card card-body border card-plain border-radius-lg d-flex align-items-center flex-row -->
-                    <li class="list-group-item border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-2 text-sm">Ty</h6>
-                            <span class="mb-2 text-xs">Wiadomość 1</span>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-2 text-sm">Osoba 1</h6>
-                            <span class="mb-2 text-xs">Wiadomość 2</span>
-                        </div>
-                    </li>
-                    <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                        <div class="d-flex flex-column">
-                            <h6 class="mb-2 text-sm">Ty</h6>
-                            <span class="mb-2 text-xs">Wiadomość 3</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <div class="card-body p-3 " style="min-height: 500px;">
+                <div class="row">
 
-            <div class="card-body pt-sm-3 pt-0 overflow-auto">
-                <!--- Start Chat Input --->
-                <div class="w-100 text-center">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
-                            <i class="ni ni-send" aria-hidden="true"></i>
-                        </button>
+                    <div class="col-9">
+                        <ul class="list-group" style="max-height: 500px; overflow-y: scroll;">
+                            <!--- card card-body border card-plain border-radius-lg d-flex align-items-center flex-row -->
+                            <li class="list-group-item border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-2 text-sm">Ty</h6>
+                                    <span class="mb-2 text-xs">Wiadomość 1</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down" aria-hidden="true"></i></button>
+                                    <div class="d-flex flex-column">
+                                        <span class="mb-2 text-sm">27 March 2020, at 12:30 PM</span>
+                                        <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">Netfli hgfhfghfg hfghfg hfghfghgf hfghfghfgh hgf hgfhghx</h6>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                                <div class="d-flex align-items-center">
+                                </div>
+                                <div class="d-flex align-items-center text-sm font-weight-bold">
+                                    <div class="d-flex flex-column">
+                                        <span class="mb-2 text-sm">28 March 2020, at 12:30 PM</span>
+                                        <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">Netfli hgfhfghfg hfghfg hfghfghgf hfghfghfgh hgf hgfhghx hgfghhhhhhhhhhhhhhhhhhhhhhhg</h6>
+                                    </div>
+                                    <button class="btn btn-icon-only btn-rounded btn-outline-danger text-end mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down" aria-hidden="true"></i></button>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-2 text-sm">Ty</h6>
+                                    <span class="mb-2 text-xs">Wiadomość 3</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+                    <div class="col-3"></div>
                 </div>
-                <!--- End Chat Input --->
-                <div class="d-flex">
-                    <button class="btn bg-gradient-danger w-100 px-3 mb-2">Zakończ czat</button>
+
+
+            </div>
+            <div class="col-9">
+                <div class="card-body pt-sm-3 pt-0 overflow-auto">
+                    <!--- Start Chat Input --->
+                    <div class="w-100 text-center">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
+                                <i class="ni ni-send" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--- End Chat Input --->
+                    <div class="d-flex">
+                        <button class="btn bg-gradient-danger w-100 px-3 mb-2">Zakończ czat</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <!--   Core JS Files   -->
 <script src="{{asset('js/core/popper.min.js')}}"></script>
@@ -649,6 +596,7 @@
 <script src="{{asset('js/plugins/smooth-scrollbar.min.js')}}"></script>
 <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
 <script src="{{asset('js/websocket.js')}}"></script>
+
 
 
 <script>
