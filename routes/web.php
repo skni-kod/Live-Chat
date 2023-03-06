@@ -23,9 +23,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-//Route::get('/websocket', 'Websockets'
-
 Route::get('/profile', [App\Http\Controllers\Auth\ProfileController::class, 'showProfile'])->name('profile');
 Route::post('/avatar/upload', [App\Http\Controllers\Auth\ProfileController::class, 'uploadAvatar'])->name('avatar.upload');
 Route::put('/profile/{id}', [App\Http\Controllers\Auth\ProfileController::class, 'updateProfile'])->name('profile.update');
+
+Route::get('/settings', [App\Http\Controllers\ChatSettingsController::class, 'showSettings'])->name('settings');
 
