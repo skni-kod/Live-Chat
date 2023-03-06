@@ -1,0 +1,240 @@
+.livechat-label-options
+{
+    font-size: 15px;
+}
+
+#livechat-preset-colors button
+{
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+#livechat-color-picker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+#livechat-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 50%;
+}
+
+#livechat-color-picker::-webkit-color-swatch {
+    border-radius: 50%;
+}
+
+#livechat-color-btn1
+{
+    background-color: #EC7063 ;
+}
+
+#livechat-color-btn2
+{
+    background-color: #A93226;
+}
+
+#livechat-color-btn3
+{
+    background-color: #9B59B6;
+}
+#livechat-color-btn4
+{
+    background-color: #5B2C6F;
+}
+#livechat-color-btn5
+{
+    background-color: #3498DB;
+}
+
+#livechat-color-btn6
+{
+    background-color: #1ABC9C;
+}
+
+#livechat-color-btn7
+{
+    background-color: #2ECC71;
+}
+
+#livechat-color-btn8
+{
+    background-color: #F1C40F;
+}
+
+#livechat-color-btn9
+{
+    background-color: #F39C12;
+}
+
+#livechat-color-btn10
+{
+    background-color: #D35400;
+}
+
+#livechat-window-position-select
+{
+    justify-content: space-between;
+}
+
+.livechat-window-position
+{
+    height: 150px;
+    width: 150px;
+    background-color: darkgray;
+}
+
+
+
+/* Styl czatu który będzie na innych stronach */
+.livechat-container
+{
+    position: relative;
+    border-style: solid;
+    border-color: #E0E0E0;
+    border-width: 1px;
+    border-radius: 3%;
+    height: 500px;
+    width: 400px;
+    background-color: white;
+    margin-right: 0px;
+    z-index: 9999 !important;
+    overflow: hidden;
+}
+
+.livechat-header
+{
+    height: 60px;
+    background-color: #3498;
+    display: flex;
+    justify-content: space-between;
+}
+
+#livechat-name-surname
+{
+    margin: 0;
+    float: left;
+    padding: 10px;
+    margin-left: 20px;
+}
+
+#livechat-close
+{
+    display: flex;
+    align-items: center;
+    float: right;
+}
+
+#livechat-close-btn
+{
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.livechat-body
+{
+    height: 375px;
+    margin: 10px 0px 15px 10px;
+    overflow-y: scroll;
+}
+
+.livechat-body::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+}
+
+.livechat-body::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.livechat-body::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.livechat-footer {
+    position: absolute;
+    bottom: 0;    width: 100%;
+    background-color: #f2f2f2;
+    padding: 10px;
+    align-items: center;
+}
+
+.livechat-footer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.livechat-footer input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.livechat-footer button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.livechat-message
+{
+    margin-bottom: 10px;
+}
+
+.livechat-message .livechat-outgoing
+{
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #E0E0E0;
+    margin-left: 50px;
+}
+
+.livechat-message .livechat-ingoing
+{
+    border-radius: 10px;
+    padding: 8px;
+    background-color: #e2ffd9;
+    margin-right: 50px;
+}
+
+.livechat-message-sender-name
+{
+    font-weight: bold;
+}
+
+.livechat-outgoing .livechat-message-sender-name {
+    text-align: right;
+}
+
+.livechat-message-content
+{
+    margin-left: 20px;
+}
+
+.livechat-message-timestamp
+{
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: #999;
+}
