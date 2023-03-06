@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('chat_color', 10);
             $table->string('side', 20);
             $table->string('status', 50);
-            $table->string('text_box', 100);
+            $table->string('message_box', 100);
             $table->timestamps();
         });
     }
