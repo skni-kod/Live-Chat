@@ -80,31 +80,23 @@
                     <span class="nav-link-text ms-1">Regulamin</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link  active" href="./settings">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Ustawienia</span>
+                </a>
+            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="./profile">
+                <a class="nav-link " href="./profile">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-in.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-up.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1 ">Sign Up</span>
                 </a>
             </li>
         </ul>
@@ -154,37 +146,14 @@
                             <i class="fa fa-user me-sm-1"></i>
                             <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
                         </a>
-                        <ul class="dropdown-menu show" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 43px);" data-popper-placement="bottom-start">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line bg-white"></i>
-                                <i class="sidenav-toggler-line bg-white"></i>
-                                <i class="sidenav-toggler-line bg-white"></i>
-                            </div>
+                            <span class="d-sm-inline d-none" style="color: white; margin-left: 10px; font-size: 14px; font-size: 0.875rem">{{ __('Wyloguj') }}</span>
                         </a>
-                    </li>
-                    <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
-                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell cursor-pointer"></i>
-                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
         </div>
@@ -192,73 +161,91 @@
     <!-- End Navbar -->
     <div class="container mt-6">
         <div class="row">
-            <div class="card">
+                <div class="card">
                     <div class="row ms-4 mx-4 mt-4">
                         <h4>Edycja wyglądu</h4>
                         <div class="col-sm-12 col-md-6">
-                            <label class="livechat-label-options">Kolor główny</label>
-                            <div class="livechat-color-palette">
-                                <div id="livechat-preset-colors">
-                                    <button type="button" id="livechat-color-btn1"></button>
-                                    <button type="button" id="livechat-color-btn2"></button>
-                                    <button type="button" id="livechat-color-btn3"></button>
-                                    <button type="button" id="livechat-color-btn4"></button>
-                                    <button type="button" id="livechat-color-btn5"></button>
-                                    <button type="button" id="livechat-color-btn6"></button>
-                                    <button type="button" id="livechat-color-btn7"></button>
-                                    <button type="button" id="livechat-color-btn8"></button>
-                                    <button type="button" id="livechat-color-btn9"></button>
-                                    <button type="button" id="livechat-color-btn10"></button>
-                                    <input type="color" id="livechat-color-picker" name="color-picker" value="#ffffff">
+                            <form id="livechat-settings-form" method="POST" action="{{ route('settings.store') }}">
+                                @csrf
+                                <label class="livechat-label-options">Kolor główny</label>
+                                <div class="livechat-color-palette">
+                                    <div id="livechat-preset-colors">
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn1" onclick="livechat_updateHeader('#EC7063')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn2" onclick="livechat_updateHeader('#A93226')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn3" onclick="livechat_updateHeader('#9B59B6')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn4" onclick="livechat_updateHeader('#5B2C6F')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn5" onclick="livechat_updateHeader('#3498DB')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn6" onclick="livechat_updateHeader('#1ABC9C')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn7" onclick="livechat_updateHeader('#2ECC71')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn8" onclick="livechat_updateHeader('#F1C40F')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn9" onclick="livechat_updateHeader('#F39C12')"></button>
+                                        <button type="button" class="livechat-color-picker-btn" id="livechat-color-btn10" onclick="livechat_updateHeader('#D35400')"></button>
+                                        <input type="color" id="livechat-color-picker" name="chatcoloristic" value="{{$chat->chat_color}}"  oninput="livechat_updateHeaderCostum()">
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                             <label class="livechat-label-options">Pozycja okna czatu</label>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label>
-                                            <div class="livechat-window-position"></div>
-                                            <input type="radio" name="livechat-position-selector" value="livechat-left-select">
-                                                Po lewej
-                                        </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <label>
-                                            <div class="livechat-window-position"></div>
-                                            <input type="radio" name="livechat-position-selector" value="livechat-right-select">
-                                                Po prawej
-                                        </label>
+                            <form id="livechat-side-form" method="POST" action="{{ route('settings.store') }}">
+                                @csrf
+                                <div class="container">
+                                    <div class="row">
+
+                                        <div class="col-md-6 col-sm-12">
+                                            <label>
+                                                <div class="livechat-window-position"></div>
+                                                <input type="radio" name="livechat-position-selector" id="livechat-left-select" value="left" onclick="setChatPosition('left')" {{ $chat->side === 'left' ? 'checked' : '' }}>
+                                                    Po lewej
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <label>
+                                                <div class="livechat-window-position"></div>
+                                                <input type="radio" name="livechat-position-selector" id="livechat-right-select" value="right" onclick="setChatPosition('right')" {{ $chat->side === 'right' ? 'checked' : '' }}>
+                                                    Po prawej
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
+                                <input type="hidden" name="selected_option" id="selected_option">
+                            </form>
 
                             <label class="livechat-label-options">Personalizacja tekstu czatu</label>
                             <div>
-                                <div class="form-group">
-                                    <label class="livechat-label-options">Tytuł</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                <form method="POST" action="{{ route('settings.store') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label class="livechat-label-options">Tytuł</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="chat_title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $chat->chat_title }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="livechat-label-options">Status</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+
+                                    <div class="form-group">
+                                        <label class="livechat-label-options">Status</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="status" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $chat->status }}">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="livechat-label-options">Pole tekstowe</label>
-                                    <div class="input-group">
-                                        <textarea class="form-control" aria-label="With textarea"></textarea>
+
+                                    <div class="form-group">
+                                        <label class="livechat-label-options">Pole tekstowe</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" name="message_box" aria-label="With textarea">{{ $chat->message_box }}</textarea>
+                                        </div>
                                     </div>
-                                </div>
+                                    <button type="submit" class="btn btn-primary" id="submit-button">Save</button>
+                                </form>
                             </div>
                         </div>
+
+
                         <div class="col d-flex justify-content-center align-items-center">
                             <div class="livechat-container">
-                                <div class="livechat-header">
-                                    <h4 class="livechat-text-color" id="livechat-name-surname">Imie Nazwisko</h4>
+                                <div class="livechat-header" style="background-color: {{ $chat->chat_color }}">
+                                    <div id="livechat-header-information">
+                                        <span class="livechat-text-color" id="livechat-title" >{{ $chat->chat_title }}</span>
+                                        <span class="livechat-text-color" id="livechat-status">{{ $chat->status }} </span>
+                                    </div>
                                     <div id="livechat-close">
                                         <button id="livechat-close-btn">
                                             X
@@ -333,24 +320,37 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="livechat-message">
+                                        <div class="livechat-ingoing">
+                                            <div class="livechat-message-sender-name">
+                                                Donald Duck
+                                            </div>
+                                            <div class="livechat-message-content">
+                                                Jakis przykladowy tekst tu pisze nwm
+                                            </div>
+                                            <div class="livechat-message-timestamp">
+                                                16:23
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="livechat-footer">
                                     <form>
-                                        <input type="text" placeholder="Tutaj możesz napisać wiadomość">
-                                        <button type="submit">Wyślij</button>
+                                        <input type="text" id="livechat-messagebox" placeholder="{{ $chat->message_box }}">
+                                        <button type="submit" id="livechat-send-button" style="background-color: {{$chat->chat_color}}">Wyślij</button>
                                     </form>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
-
-    </div>
 </div>
 
-
+<script src="../js/livechat-skni.js"></script>
 <!--   Core JS Files   -->
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>

@@ -28,4 +28,11 @@ Route::post('/avatar/upload', [App\Http\Controllers\Auth\ProfileController::clas
 Route::put('/profile/{id}', [App\Http\Controllers\Auth\ProfileController::class, 'updateProfile'])->name('profile.update');
 
 Route::get('/settings', [App\Http\Controllers\ChatSettingsController::class, 'showSettings'])->name('settings');
+Route::resource('settings', App\Http\Controllers\ChatSettingsController::class );
+Route::post('/chat-settings', [App\Http\Controllers\ChatSettingsController::class, 'store'])->name('chat-settings.store');
+Route::post('/save-livechat-option', [App\Http\Controllers\ChatSettingsController::class, 'savePosition'])->name('save-livechat-option');
+
+Route::get('/chatonly',  [App\Http\Controllers\ChatSettingsController::class, 'showChat'])->name('chatonly');
+
+
 
