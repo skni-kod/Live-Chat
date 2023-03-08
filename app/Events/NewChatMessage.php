@@ -24,15 +24,9 @@ class NewChatMessage implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($message, $user)
+    public function __construct($message)
     {
         $this->message = $message;
-        $this->user = $user;
-        $message = Message::createMessage(
-            $user,
-            1,
-            1
-        );
     }
 
     /**

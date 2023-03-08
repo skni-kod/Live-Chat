@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
 
 return new class extends Migration
 {
@@ -12,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('conversations', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary()->default(DB::raw('UUID()'));
             $table->string('visitor_id')->nullable();
             $table->foreign('visitor_id')->references('visitor_id')->on('visitors')->onDelete('set null');
             $table->bigInteger('agent_id')->unsigned()->nullable();
