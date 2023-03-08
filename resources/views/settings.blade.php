@@ -57,7 +57,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="./pages/dashboard.html">
+                <a class="nav-link" href="./dashboard">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
@@ -65,7 +65,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="./pages/tables.html">
+                <a class="nav-link " href="#">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                     </div>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="./pages/rtl.html">
+                <a class="nav-link " href="#">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
                     </div>
@@ -192,14 +192,14 @@
 
                                         <div class="col-md-6 col-sm-12">
                                             <label>
-                                                <div class="livechat-window-position"></div>
+                                                <div class="livechat-window-position"><img src="{{asset('img/lewy.png')}}" alt="zdjecie lewe"> </div>
                                                 <input type="radio" name="livechat-position-selector" id="livechat-left-select" value="left" onclick="setChatPosition('left')" {{ $chat->side === 'left' ? 'checked' : '' }}>
                                                     Po lewej
                                             </label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <label>
-                                                <div class="livechat-window-position"></div>
+                                                <div class="livechat-window-position"><img src="{{asset('img/prawy.png')}}" alt="zdjecie prawe"> </div>
                                                 <input type="radio" name="livechat-position-selector" id="livechat-right-select" value="right" onclick="setChatPosition('right')" {{ $chat->side === 'right' ? 'checked' : '' }}>
                                                     Po prawej
                                             </label>
