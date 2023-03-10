@@ -1,3 +1,9 @@
+
+.livechat-container
+{
+    font-family: 'Roboto', sans-serif;
+}
+
 .livechat-label-options
 {
     font-size: 15px;
@@ -90,7 +96,6 @@
 {
     height: 150px;
     width: 150px;
-    background-color: darkgray;
 }
 
 
@@ -104,7 +109,7 @@
     border-width: 1px;
     border-radius: 3%;
     height: 500px;
-    width: 400px;
+    width: 430px;
     background-color: white;
     margin-right: 0px;
     z-index: 9999 !important;
@@ -113,18 +118,36 @@
 
 .livechat-header
 {
-    height: 60px;
-    background-color: #3498;
+    border-width: 1px;
+    border-radius: 3%;
+    height: calc(80px);
     display: flex;
     justify-content: space-between;
 }
 
-#livechat-name-surname
+#livechat-header-information
 {
-    margin: 0;
+    margin-left: 30px;
+
+}
+
+#livechat-title
+{
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 25px;
     float: left;
-    padding: 10px;
-    margin-left: 20px;
+    clear: left;
+}
+
+
+#livechat-status
+{
+    margin-left: 10px;
+    margin-top: 3px;
+    font-size: 15px;
+    float: left;
+    clear: left;
 }
 
 #livechat-close
@@ -142,12 +165,18 @@
     padding: 0;
     background: none;
     border: none;
+    font-weight: bold;
+}
+
+#livechat-close-btn:hover
+{
+    cursor: pointer;
 }
 
 .livechat-body
 {
-    height: 375px;
-    margin: 10px 0px 15px 10px;
+    height: 350px;
+    margin: 0px 0px 0px 10px;
     overflow-y: scroll;
 }
 
@@ -169,7 +198,6 @@
     position: absolute;
     bottom: 0;    width: 100%;
     background-color: #f2f2f2;
-    padding: 10px;
     align-items: center;
 }
 
@@ -177,6 +205,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 .livechat-footer input[type="text"] {
@@ -199,7 +228,7 @@
 
 .livechat-message
 {
-    margin-bottom: 10px;
+    margin-bottom: 8px
 }
 
 .livechat-message .livechat-outgoing
@@ -208,6 +237,7 @@
     padding: 8px;
     background-color: #E0E0E0;
     margin-left: 50px;
+    margin-right: 10px;
 }
 
 .livechat-message .livechat-ingoing
@@ -237,4 +267,16 @@
     font-size: 0.8em;
     margin-left: 20px;
     color: #999;
+}
+
+#livechat-messagebox
+{
+    font-size: 15px;
+    padding: 15px;
+}
+
+#livechat-send-button
+{
+    font-size: 15px;
+    padding: 15px;
 }

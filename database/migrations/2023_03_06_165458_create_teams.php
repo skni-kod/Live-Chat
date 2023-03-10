@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('team_creator')->unsigned()->nullable();
+            $table->string('app_id', 16);
+            $table->string('join_code', 16)->unique();
+            $table->unique('app_id');
             $table->foreign('team_creator')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });

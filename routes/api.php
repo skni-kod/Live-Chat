@@ -18,4 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/message', [App\Http\Controllers\MessageController::class, 'broadcast']);
+Route::get('/load-chat/{chat_user}', [App\Http\Controllers\Conversation\ClientConversationController::class, 'loadBaseConversation']);
+Route::post('/create-conversation', [App\Http\Controllers\Conversation\ClientConversationController::class, 'createConversation']);
+
+Route::post('/client-message', [App\Http\Controllers\Conversation\ClientConversationController::class, 'sendMessage']);

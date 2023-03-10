@@ -32,6 +32,9 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+
 
     @vite(['resources/js/app.js'])
 </head>
@@ -92,22 +95,6 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-in.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="./pages/sign-up.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1 ">Sign Up</span>
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -149,41 +136,20 @@
                         <input type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
-                <ul class="navbar-nav justify-content-end">
-
+                <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center dropdown">
-                        <a href="javascript:;" class="nav-link text-white p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user me-sm-1"></i>
                             <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 43px);" data-popper-placement="bottom-start">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line bg-white"></i>
-                                <i class="sidenav-toggler-line bg-white"></i>
-                                <i class="sidenav-toggler-line bg-white"></i>
-                            </div>
+                            <span class="d-sm-inline d-none" style="color: white; margin-left: 10px; font-size: 14px; font-size: 0.875rem">{{ __('Wyloguj') }}</span>
                         </a>
-                    </li>
-                    <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
-                            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -284,36 +250,87 @@
 
         <!--- Sekcja aktualnych chatów ---->
         <div class="row mt-7">
-            <div class="col-lg-4 mb-lg-0 mb-4 mt-2">
 
-                <div class="card">
-                    <div class="card-body p-4">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Osoba 1</p>
-                            <h5 class="font-weight-bolder">
-                                Imie Nazwisko
-                            </h5>
-                            <p class="mb-0">
-                                <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
-                                    Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
-                            </p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Zaproś osoby do obsługi chatu</h5>
+                            <p class="card-text">Stwórz zespół i odpowiadajcie wspólnie na pytania klientów.</p>
+                            <a href="#" class="btn btn-primary mt-2">Zarządzaj zespołem</a>
                         </div>
                     </div>
-
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="p-2">
-                            <button type="button" class="btn btn-default">Zajme się tym!</button>
-                        </div>
-                        <div class="p-2">
-                            <button type="button" class="btn btn-success">Zakończ</button>
-                        </div>
-                        <div class="p-2">
-                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dołącz do istniejącego zespołu</h5>
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Podaj kod zespołu</span>
+                                    <input type="text" class="form-control" placeholder="Wpisz kod" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Dołącz</a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <h3 class="card-title mb-3">Instalacja</h3>
+                            <p>Aby korzystać z czatu wystarczy, że załączysz poniższy kod JS na swojej stronie: </p>
+                            <pre id="installation" class="language-js"><code>&lt;script src=&quot;https:/strona.pl&quot;&gt;&lt;/script&gt;</code><br><code>&lt;script&gt;const chat = new LiveChat(&quot;{{$app_id}}&quot;);&lt;/script&gt;</code></pre>
+                            <button id="copy_installation" class="btn btn-primary mt-2">Kopiuj kod</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="row">
+                    @foreach($conversations['active'] as $conversation)
+                        <div class="col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Osoba 1</p>
+                                        <h5 class="font-weight-bolder">
+                                            Imie Nazwisko
+                                        </h5>
+                                        <p class="mb-0">
+                                            <span class="text-primary text-sm font-weight-bolder">#{{$conversation->conversation_id}}</span></br>
+                                            Krótki opis problemu </br>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-default">Odpowiedz</button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-success">Zakończ</button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+
+
 
             <div class="col-lg-4 mb-lg-0 mb-4">
                 <div class="card">
@@ -620,6 +637,26 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+    <script>
+        Prism.highlightAll();
+
+
+        const textToCopy = document.getElementById("installation");
+        const copyButton = document.getElementById("copy_installation");
+
+        copyButton.addEventListener("click", function() {
+            // Get the text inside the <pre> element and remove consecutive spaces
+            const text = textToCopy.textContent.replace(/\s+/g, " ");
+
+            // Copy the modified text to the clipboard
+            const temp = document.createElement("textarea");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+        });
+    </script>
 </body>
 
 </html>

@@ -48,4 +48,8 @@ class ProfileController extends Controller
 
         return back()->with('success', 'Data updated successfully!');
     }
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
 }

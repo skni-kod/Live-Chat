@@ -10,16 +10,9 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['message', 'user_id', 'conversation_id'];
+    protected $table = 'messages';
+    protected $fillable = ['message', 'agent_id', 'conversation_id', 'visitor_id', 'sent_at'];
 
-    public static function createMessage($content, $userId, $conversationId)
-    {
-        $message = new Message([
-            'message' => $content,
-            'user_id' => $userId,
-            'conversation_id' => $conversationId,
-        ]);
-        $message->save();
-        return $message;
-    }
+
+
 }

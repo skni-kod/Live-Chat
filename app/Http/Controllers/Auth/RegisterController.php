@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TeamController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Profile;
+use App\Services\TeamService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -79,6 +81,9 @@ class RegisterController extends Controller
         ]);
 
         $user->profile()->save($profile);
+
+        $team = new TeamService;
+        $team->createTeam($user->id);
 
         return $user;
     }
