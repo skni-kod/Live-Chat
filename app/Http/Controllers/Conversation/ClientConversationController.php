@@ -23,14 +23,16 @@ class ClientConversationController extends ConversationController
 
     }
 
-    public function createConversation($visitorId){
-        Conversation::create(['visitor_id' => $visitorId, 'agent_id' => null, 'status' => 'created']);
+    public function createConversation($visitorId, $appId){
+        Conversation::create(['app_id' => $appId, 'visitor_id' => $visitorId, 'agent_id' => null, 'status' => 'created']);
 
         //Conversation::createConversation($visitorId, , 'started');
     }
 
     private function getVisitorActiveConversation($visitorId){
-        return Conversation::where('visitor_id', '=', $visitorId)->where('status', '<>', 'closed')->limit(1)->first()->toArray();
+        $result = Conversation::where('visitor_id', '=', $visitorId)->where('status', '<>', 'closed')->limit(1)->first();
+        if($result) return $result->toArray();
+        else return [];
     }
 
     protected function loadConversationMessages($chat_user){
@@ -57,7 +59,7 @@ class ClientConversationController extends ConversationController
         $visitorId = $request->input('visitor_id');
         $activeConversation = $this->getVisitorActiveConversation($visitorId);
         if(!isset($activeConversation['id'])){
-            $this->createConversation($visitorId);
+            $this->createConversation($visitorId, $request->input('app_id'));
             $activeConversation = $this->getVisitorActiveConversation($visitorId);
         }
 //        echo '<pre>';

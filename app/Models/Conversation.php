@@ -9,7 +9,7 @@ class Conversation extends Model
 {
     use HasFactory;
     protected $table = 'conversations';
-    protected $fillable = ['visitor_id', 'agent_id', 'status'];
+    protected $fillable = ['app_id', 'visitor_id', 'agent_id', 'status'];
     protected $casts = [
         'id' => 'string'
     ];

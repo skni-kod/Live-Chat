@@ -122,7 +122,7 @@ class LiveChat{
                  headers: {
                      'Content-Type': 'application/json'
                  },
-                 body: JSON.stringify({visitor_id: visitorId, visits: numberOfVisits, variables: this.#variables, message: message})
+                 body: JSON.stringify({visitor_id: visitorId, visits: numberOfVisits, variables: this.#variables, message: message, app_id: this.#appId})
              };
 
              fetch(import.meta.env.VITE_API_ENDPOINT+"/client-message", options)
@@ -174,6 +174,6 @@ class LiveChat{
     }
 }
 
-var live_chat = new LiveChat('fdfdffd');
+var live_chat = new LiveChat('EynE1r8D1ZZYWrKj');
 
 

@@ -32,6 +32,9 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+
 
     @vite(['resources/js/app.js'])
 </head>
@@ -247,36 +250,87 @@
 
         <!--- Sekcja aktualnych chatów ---->
         <div class="row mt-7">
-            <div class="col-lg-4 mb-lg-0 mb-4 mt-2">
 
-                <div class="card">
-                    <div class="card-body p-4">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Osoba 1</p>
-                            <h5 class="font-weight-bolder">
-                                Imie Nazwisko
-                            </h5>
-                            <p class="mb-0">
-                                <span class="text-primary text-sm font-weight-bolder">#Chat-ID</span></br>
-                                    Krótki opis problemu </br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
-                            </p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Zaproś osoby do obsługi chatu</h5>
+                            <p class="card-text">Stwórz zespół i odpowiadajcie wspólnie na pytania klientów.</p>
+                            <a href="#" class="btn btn-primary mt-2">Zarządzaj zespołem</a>
                         </div>
                     </div>
-
-                    <div class="d-flex justify-content-center mb-3">
-                        <div class="p-2">
-                            <button type="button" class="btn btn-default">Zajme się tym!</button>
-                        </div>
-                        <div class="p-2">
-                            <button type="button" class="btn btn-success">Zakończ</button>
-                        </div>
-                        <div class="p-2">
-                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Dołącz do istniejącego zespołu</h5>
+                            <div class="form-group">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Podaj kod zespołu</span>
+                                    <input type="text" class="form-control" placeholder="Wpisz kod" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Dołącz</a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <h3 class="card-title mb-3">Instalacja</h3>
+                            <p>Aby korzystać z czatu wystarczy, że załączysz poniższy kod JS na swojej stronie: </p>
+                            <pre id="installation" class="language-js"><code>&lt;script src=&quot;https:/strona.pl&quot;&gt;&lt;/script&gt;</code><br><code>&lt;script&gt;const chat = new LiveChat(&quot;{{$app_id}}&quot;);&lt;/script&gt;</code></pre>
+                            <button id="copy_installation" class="btn btn-primary mt-2">Kopiuj kod</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="row">
+                    @foreach($conversations['active'] as $conversation)
+                        <div class="col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Osoba 1</p>
+                                        <h5 class="font-weight-bolder">
+                                            Imie Nazwisko
+                                        </h5>
+                                        <p class="mb-0">
+                                            <span class="text-primary text-sm font-weight-bolder">#{{$conversation->conversation_id}}</span></br>
+                                            Krótki opis problemu </br>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-default">Odpowiedz</button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-success">Zakończ</button>
+                                        </div>
+                                        <div class="p-2">
+                                            <button type="button" class="btn btn-danger">Zablokuj</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+
+
 
             <div class="col-lg-4 mb-lg-0 mb-4">
                 <div class="card">
@@ -583,6 +637,26 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+    <script>
+        Prism.highlightAll();
+
+
+        const textToCopy = document.getElementById("installation");
+        const copyButton = document.getElementById("copy_installation");
+
+        copyButton.addEventListener("click", function() {
+            // Get the text inside the <pre> element and remove consecutive spaces
+            const text = textToCopy.textContent.replace(/\s+/g, " ");
+
+            // Copy the modified text to the clipboard
+            const temp = document.createElement("textarea");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand("copy");
+            document.body.removeChild(temp);
+        });
+    </script>
 </body>
 
 </html>

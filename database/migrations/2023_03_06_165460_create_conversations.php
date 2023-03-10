@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->uuid('id')->primary()->default(DB::raw('UUID()'));
+            $table->string('app_id', 16);
+            $table->foreign('app_id')->references('app_id')->on('teams')->onDelete('cascade');
             $table->string('visitor_id')->nullable();
             $table->foreign('visitor_id')->references('visitor_id')->on('visitors')->onDelete('set null');
             $table->bigInteger('agent_id')->unsigned()->nullable();
