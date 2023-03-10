@@ -29,3 +29,9 @@ Route::put('/profile/{id}', [App\Http\Controllers\Auth\ProfileController::class,
 
 Route::get('/settings', [App\Http\Controllers\ChatSettingsController::class, 'showSettings'])->name('settings');
 
+use App\Http\Controllers\ChatSettingsController;
+
+Route::prefix('chat')->group(function () {
+    Route::get('settings', [ChatSettingsController::class, 'edit'])->name('chat-settings.edit');
+    Route::put('settings', [ChatSettingsController::class, 'updateSettings'])->name('chat-settings.update');
+});

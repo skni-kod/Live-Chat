@@ -193,7 +193,7 @@
     <div class="container mt-6">
         <div class="row">
             <div class="card">
-                    <div class="row ms-4 mx-4 mt-4">
+                <div class="row ms-4 mx-4 mt-4">
                         <h4>Edycja wyglądu</h4>
                         <div class="col-sm-12 col-md-6">
                             <label class="livechat-label-options">Kolor główny</label>
@@ -238,7 +238,11 @@
                                 <div class="form-group">
                                     <label class="livechat-label-options">Tytuł</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                        <form method="POST" action="{{ route('chat-settings.update') }}">
+                                            @csrf
+                                            @method('PUT')
+                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="chat_title" value="{{ $chatSettings->chat_title ?? '' }}">
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="form-group">
