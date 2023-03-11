@@ -2,40 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chat;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-
-class ChatSettingsController extends Controller
-{
-    public function showSettings()
-    {
-        // Retrieve the authenticated user's chat settings
-        $chatSettings = auth()->user()->chat;
-
-        return view('settings', compact('chatSettings'));
-    }
-
-    public function updateSettings(Request $request)
-    {
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'chat_title' => 'nullable|string',
-        ]);
-
-        // Retrieve the authenticated user's chat settings
-        $chatSettings = auth()->user()->chat;
-
-        // Update the chat settings with the validated data
-        $chatSettings->fill($validatedData)->save();
-
-        return back()->with('success', 'Chat settings updated successfully.');
-    }
-
-    public function resetSettings()
-    {
-
-=======
 use App\Models\Chat;
 
 class ChatSettingsController extends Controller
@@ -107,6 +74,5 @@ class ChatSettingsController extends Controller
 
         // Redirect back to the form with a success message
         return redirect()->back()->with('success', 'Chat window position updated successfully.');
->>>>>>> 2bbb3ad5829ee8717c6b81626b1d53378bc4136e
     }
 }

@@ -31,12 +31,20 @@ Route::get('/profile', [App\Http\Controllers\Auth\ProfileController::class, 'sho
 Route::post('/avatar/upload', [App\Http\Controllers\Auth\ProfileController::class, 'uploadAvatar'])->name('avatar.upload');
 Route::put('/profile/{id}', [App\Http\Controllers\Auth\ProfileController::class, 'updateProfile'])->name('profile.update');
 
-Route::get('/settings', [App\Http\Controllers\ChatSettingsController::class, 'showSettings'])->name('settings');
-Route::resource('settings', App\Http\Controllers\ChatSettingsController::class );
-Route::post('/chat-settings', [App\Http\Controllers\ChatSettingsController::class, 'store'])->name('chat-settings.store');
+Route::get('/settings', [App\Http\Controllers\ChatSettingsController::class, 'index'])->name('settings');
+Route::post('/chat-settings', [App\Http\Controllers\ChatSettingsController::class, 'store'])->name('settings.store');
 Route::post('/save-livechat-option', [App\Http\Controllers\ChatSettingsController::class, 'savePosition'])->name('save-livechat-option');
 
 Route::get('/chatonly',  [App\Http\Controllers\ChatSettingsController::class, 'showChat'])->name('chatonly');
+
+
+
+
+Route::get('/team', [App\Http\Controllers\TeamController::class, 'index'])->name('team');
+Route::post('/team/remove', [App\Http\Controllers\TeamController::class, 'removeMember'])->name('team.remove');
+Route::post('/teams/generate-code', [App\Http\Controllers\TeamController::class, 'generateCode'])->name('team.generatecode');
+
+
 
 
 

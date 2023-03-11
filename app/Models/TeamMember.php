@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TeamMember extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['user_id', 'edit_chat_settings', 'team_id'];
     protected $table = 'team_members';
-
+    protected $primaryKey = 'id';
+    protected $fillable = ['user_id', 'team_id', 'edit_chat_settings'];
 
 }
