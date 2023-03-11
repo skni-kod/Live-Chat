@@ -246,8 +246,6 @@
         <!-- LiveChat Stats End -->
 
 
-
-
         <!--- Sekcja aktualnych chatów ---->
         <div class="row mt-7">
 
@@ -289,6 +287,25 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="modal fade" id="modal-confirm-close-conversation" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-close-conversation" aria-hidden="true">
+                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="py-3 text-center">
+                                    <i class="ni ni-bell-55 ni-3x"></i>
+                                    <h4 class="text-gradient text-danger mt-4">Na pewno chcesz zakończyć konwersację ?</h4>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Anuluj</button>
+                                <button type="button" class="btn bg-gradient-primary" data-bs-dismiss="modal">Tak, zakończ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-2">
                 <div class="row">
                     @foreach($conversations['active'] as $conversation)
@@ -296,34 +313,32 @@
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Osoba 1</p>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Data</p>
                                         <h5 class="font-weight-bolder">
-                                            Imie Nazwisko
+                                            Wot-Recruitment
                                         </h5>
+                                        <span class="text-primary text-sm font-weight-bolder">#{{$conversation->conversation_id}}</span>
                                         <p class="mb-0">
-                                            <span class="text-primary text-sm font-weight-bolder">#{{$conversation->conversation_id}}</span></br>
-                                            Krótki opis problemu </br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur, dui sed pharetra eleifend, nibh tellus luctus dolor, in porta diam arcu id risus.
+                                            {{$conversation->message}}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-center mb-3">
                                         <div class="p-2">
-                                            <button type="button" class="btn btn-default">Odpowiedz</button>
+                                            <button type="button" data-conversation-id="{{$conversation->conversation_id}}" class="btn btn-default">Odpowiedz</button>
                                         </div>
                                         <div class="p-2">
-                                            <button type="button" class="btn btn-success">Zakończ</button>
+                                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-confirm-close-conversation">Zakończ</button>
                                         </div>
                                         <div class="p-2">
                                             <button type="button" class="btn btn-danger">Zablokuj</button>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
+
                     @endforeach
                 </div>
 
@@ -622,7 +637,7 @@
 <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
 <script src="{{asset('js/websocket.js')}}"></script>
 
-
+<script src="{{asset('js/argon-dashboard.js')}}"></script>
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -635,8 +650,7 @@
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset('js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+
     <script>
         Prism.highlightAll();
 
