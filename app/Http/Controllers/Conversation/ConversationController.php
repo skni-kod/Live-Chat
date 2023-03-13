@@ -10,7 +10,7 @@ use App\Events\NewChatMessage;
 
 abstract class ConversationController extends Controller
 {
-    abstract public function joinConversation();
+    abstract public function joinConversation(Request $request);
     abstract protected function loadConversationMessages($chat_user);
     abstract public function sendMessage(Request $request);
 
@@ -31,7 +31,9 @@ abstract class ConversationController extends Controller
             'message' => $message
         ]);
 
-        event(new NewChatMessage($message));
+        $isSupportAgent = !is_null($agentId);
+
+        event(new NewChatMessage($message, $isSupportAgent));
 
         return response()->json([], 200);
     }

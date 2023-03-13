@@ -30,6 +30,8 @@ class TeamService{
             'team_id' => $team->id,
             'edit_chat_settings' => 1
         ]);
+
+        return $team->id;
     }
 
     public function getTeamAppId($userId){

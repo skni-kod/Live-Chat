@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TeamController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Chat;
 use App\Services\TeamService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -83,7 +83,16 @@ class RegisterController extends Controller
         $user->profile()->save($profile);
 
         $team = new TeamService;
-        $team->createTeam($user->id);
+        $teamId = $team->createTeam($user->id);
+
+        $chat = Chat::create([
+            'team_id' => $teamId,
+            'chat_title' => config('chat_settings.default_title'),
+            'chat_color' => config('chat_settings.default_color'),
+            'side' => config('chat_settings.default_side'),
+            'status' => config('chat_settings.status'),
+            'message_box' => config('chat_settings.default_message_box')
+        ]);
 
         return $user;
     }

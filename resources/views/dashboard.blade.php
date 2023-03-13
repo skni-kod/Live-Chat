@@ -18,8 +18,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}">
+
 
     <title>LiveChat | Dashboard</title>
 
@@ -37,6 +39,7 @@
 
 
     @vite(['resources/js/app.js'])
+    @vite(['resources/js/support-chat.js'])
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -315,7 +318,7 @@
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-uppercase font-weight-bold">Data</p>
                                         <h5 class="font-weight-bolder">
-                                            Wot-Recruitment
+                                            Nazwa strony
                                         </h5>
                                         <span class="text-primary text-sm font-weight-bolder">#{{$conversation->conversation_id}}</span>
                                         <p class="mb-0">
@@ -326,7 +329,7 @@
                                 <div class="card-footer">
                                     <div class="d-flex justify-content-center mb-3">
                                         <div class="p-2">
-                                            <button type="button" data-conversation-id="{{$conversation->conversation_id}}" class="btn btn-default">Odpowiedz</button>
+                                            <button type="button" data-conversation-id="{{$conversation->conversation_id}}" class="fixed-plugin-button btn btn-default write-response">Odpowiedz</button>
                                         </div>
                                         <div class="p-2">
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-confirm-close-conversation">Zakończ</button>
@@ -537,6 +540,28 @@
     </div>
 </main>
 
+<template id="message-support">
+    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg float-right">
+        <div class="d-flex align-items-center ms-auto">
+            <div class="d-flex flex-column">
+                <span class="mb-2 text-sm message-date"></span>
+                <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-blue text-white border-radius-lg message-content"></h6>
+            </div>
+        </div>
+    </li>
+</template>
+<template id="message-client">
+    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+        <div class="d-flex align-items-center">
+            <i class="fas fa-user mb-0 me-3 btn-sm d-flex align-items-center justify-content-center" aria-hidden="true"></i>
+            <div class="d-flex flex-column">
+                <span class="mb-2 text-sm message-date"></span>
+                <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg message-content"></h6>
+            </div>
+        </div>
+    </li>
+</template>
+
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="ni ni-chat-round py-2"> </i>
@@ -568,40 +593,8 @@
                 <div class="row">
 
                     <div class="col-9">
-                        <ul class="list-group" style="max-height: 500px; overflow-y: scroll;">
-                            <!--- card card-body border card-plain border-radius-lg d-flex align-items-center flex-row -->
-                            <li class="list-group-item border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-2 text-sm">Ty</h6>
-                                    <span class="mb-2 text-xs">Wiadomość 1</span>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down" aria-hidden="true"></i></button>
-                                    <div class="d-flex flex-column">
-                                        <span class="mb-2 text-sm">27 March 2020, at 12:30 PM</span>
-                                        <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">Netfli hgfhfghfg hfghfg hfghfghgf hfghfghfgh hgf hgfhghx</h6>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                                <div class="d-flex align-items-center">
-                                </div>
-                                <div class="d-flex align-items-center text-sm font-weight-bold">
-                                    <div class="d-flex flex-column">
-                                        <span class="mb-2 text-sm">28 March 2020, at 12:30 PM</span>
-                                        <h6 class="mb-2 text-xs border-1 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">Netfli hgfhfghfg hfghfg hfghfghgf hfghfghfgh hgf hgfhghx hgfghhhhhhhhhhhhhhhhhhhhhhhg</h6>
-                                    </div>
-                                    <button class="btn btn-icon-only btn-rounded btn-outline-danger text-end mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-down" aria-hidden="true"></i></button>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-1 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                                <div class="d-flex flex-column">
-                                    <h6 class="mb-2 text-sm">Ty</h6>
-                                    <span class="mb-2 text-xs">Wiadomość 3</span>
-                                </div>
-                            </li>
+                        <ul class="list-group" style="max-height: 500px; overflow-y: scroll;" id="chat-messages">
+
                         </ul>
                     </div>
                     <div class="col-3"></div>
@@ -614,8 +607,8 @@
                     <!--- Start Chat Input --->
                     <div class="w-100 text-center">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Tutaj możesz napisać" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-primary mb-0" type="button" id="button-addon2">
+                            <input type="text" class="form-control" id="message-box" placeholder="Tutaj możesz napisać">
+                            <button class="btn btn-outline-primary mb-0" type="button" id="send-message">
                                 <i class="ni ni-send" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -635,9 +628,9 @@
 <script src="{{asset('js/plugins/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('js/plugins/smooth-scrollbar.min.js')}}"></script>
 <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
-<script src="{{asset('js/websocket.js')}}"></script>
 
 <script src="{{asset('js/argon-dashboard.js')}}"></script>
+
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

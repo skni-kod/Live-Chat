@@ -161,13 +161,8 @@
     <!-- End Navbar -->
     <div class="container mt-6">
         <div class="row">
-<<<<<<< HEAD
-            <div class="card">
-                <div class="row ms-4 mx-4 mt-4">
-=======
                 <div class="card">
                     <div class="row ms-4 mx-4 mt-4">
->>>>>>> 2bbb3ad5829ee8717c6b81626b1d53378bc4136e
                         <h4>Edycja wyglądu</h4>
                         <div class="col-sm-12 col-md-6">
                             <form id="livechat-settings-form" method="POST" action="{{ route('settings.store') }}">
@@ -216,16 +211,7 @@
 
                             <label class="livechat-label-options">Personalizacja tekstu czatu</label>
                             <div>
-<<<<<<< HEAD
-                                <div class="form-group">
-                                    <label class="livechat-label-options">Tytuł</label>
-                                    <div class="input-group">
-                                        <form method="POST" action="{{ route('chat-settings.update') }}">
-                                            @csrf
-                                            @method('PUT')
-                                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="chat_title" value="{{ $chatSettings->chat_title ?? '' }}">
-                                        </form>
-=======
+
                                 <form method="POST" action="{{ route('settings.store') }}">
                                     @csrf
                                     <div class="form-group">
@@ -233,7 +219,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="chat_title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $chat->chat_title }}">
                                         </div>
->>>>>>> 2bbb3ad5829ee8717c6b81626b1d53378bc4136e
+
                                     </div>
 
                                     <div class="form-group">

@@ -70,7 +70,7 @@ class ClientConversationController extends ConversationController
         $this->insertMessage($activeConversation['id'], null, $visitorId, $request->input('message'));
     }
 
-    public function joinConversation()
+    public function joinConversation(Request $request)
     {
         // TODO: Implement joinConversation() method.
     }

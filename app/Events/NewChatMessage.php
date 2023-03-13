@@ -17,16 +17,19 @@ class NewChatMessage implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $user;
+    public $status;
+    public $is_support_agent;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $isSupportAgent)
     {
+        $this->status = "ok";
         $this->message = $message;
+        $this->is_support_agent = $isSupportAgent;
     }
 
     /**

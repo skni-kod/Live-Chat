@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\ChatSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,9 +40,11 @@ Route::get('/chatonly',  [App\Http\Controllers\ChatSettingsController::class, 's
 
 
 
-use App\Http\Controllers\ChatSettingsController;
-
 Route::prefix('chat')->group(function () {
     Route::get('settings', [ChatSettingsController::class, 'edit'])->name('chat-settings.edit');
     Route::put('settings', [ChatSettingsController::class, 'updateSettings'])->name('chat-settings.update');
 });
+
+
+Route::post('/support-chat-open', [App\Http\Controllers\Conversation\SupportConversationController::class, 'joinConversation'])->middleware('auth');
+Route::post('/support-message', [App\Http\Controllers\Conversation\SupportConversationController::class, 'sendMessage'])->middleware('auth');
