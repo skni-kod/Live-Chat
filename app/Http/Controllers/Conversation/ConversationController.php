@@ -33,7 +33,7 @@ abstract class ConversationController extends Controller
 
         $isSupportAgent = !is_null($agentId);
 
-        event(new NewChatMessage($message, $isSupportAgent));
+        event(new NewChatMessage($message, $isSupportAgent, $conversationId));
 
         return response()->json([], 200);
     }

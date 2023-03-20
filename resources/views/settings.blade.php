@@ -213,46 +213,10 @@
                         <div>
                             <form method="POST" action="{{ route('settings.store') }}">
                                 @csrf
-<<<<<<< HEAD
-                                <div class="container">
-                                    <div class="row">
-
-                                        <div class="col-md-6 col-sm-12">
-                                            <label>
-                                                <div class="livechat-window-position"><img src="{{asset('img/lewy.png')}}" alt="zdjecie lewe"> </div>
-                                                <input type="radio" name="livechat-position-selector" id="livechat-left-select" value="left" onclick="setChatPosition('left')" {{ $chat->side === 'left' ? 'checked' : '' }}>
-                                                    Po lewej
-                                            </label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <label>
-                                                <div class="livechat-window-position"><img src="{{asset('img/prawy.png')}}" alt="zdjecie prawe"> </div>
-                                                <input type="radio" name="livechat-position-selector" id="livechat-right-select" value="right" onclick="setChatPosition('right')" {{ $chat->side === 'right' ? 'checked' : '' }}>
-                                                    Po prawej
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="selected_option" id="selected_option">
-                            </form>
-
-                            <label class="livechat-label-options">Personalizacja tekstu czatu</label>
-                            <div>
-
-                                <form method="POST" action="{{ route('settings.store') }}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label class="livechat-label-options">Tytuł</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" name="chat_title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $chat->chat_title }}">
-                                        </div>
-
-=======
                                 <div class="form-group">
                                     <label class="livechat-label-options">Tytuł</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="chat_title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{ $chat->chat_title }}">
->>>>>>> 3c48ce53aa75b491ac8a29a3c781ac16bae628e1
                                     </div>
                                 </div>
 

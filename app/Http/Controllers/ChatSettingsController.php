@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use App\Services\ChatService;
 
 class ChatSettingsController extends Controller
 {
@@ -14,7 +15,8 @@ class ChatSettingsController extends Controller
 
     public function showChat()
     {
-        $chat = Chat::firstOrCreate([]);
+        $chatSerive  = new ChatService();
+        $chat = $chatSerive->getChatSettings(auth()->user()->id);
         return view('chatonly', compact('chat'));
     }
 

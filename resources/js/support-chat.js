@@ -2,8 +2,9 @@ import Pusher from "pusher-js";
 
 class SupportChat {
     #activeConversation;
+    #conversationToClose;
     #channel;
-
+    #audio;
     #loadMessages(conversation_id){
 
     }
@@ -24,16 +25,22 @@ class SupportChat {
             .catch(error => console.log(error));
     }
 
-    #insertMessage(message, sentAt, sentBySupport){
+    #scrollToBottom() {
+        const messages = document.querySelector('#chat-messages');
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+
+    #insertMessage(message, sentAt, supportMessage){
         let template_id = '#message-client';
-        if(sentBySupport) template_id = '#message-support';
+        if(supportMessage) template_id = '#message-support';
 
         const template = document.querySelector(template_id).content;
         const clonedElement = template.firstElementChild.cloneNode(true);
         clonedElement.querySelector('.message-content').innerHTML = message;
         const chatMessages = document.querySelector('#chat-messages');
         chatMessages.appendChild(clonedElement);
-
+        this.#scrollToBottom();
     }
 
     #insertMessages(data){
@@ -49,24 +56,58 @@ class SupportChat {
 
     #listenNewMessage(){
         this.#channel.bind('NewChatMessage', function(data) {
+            if(!data.is_support_agent) this.#audio.play();
             this.#insertMessage(data.message, '', data.is_support_agent);
         }.bind(this));
     }
 
-    #listenMessageSend(){
-        document.querySelector('#send-message').addEventListener('click', function(){
-            const message = document.querySelector('#message-box').value;
-            this.#sendMessage(message);
-        }.bind(this));
+    #handleSendMessage() {
+        const textBox = document.querySelector('#message-box');
+        const message = textBox.value;
+        textBox.value = "";
+        this.#sendMessage(message);
     }
 
-    #connect(){
-        const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
-            cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER
-        });
+    #listenMessageSend(){
+        document.querySelector('#send-message').addEventListener('click', this.#handleSendMessage.bind(this));
+    }
 
-        this.#channel = pusher.subscribe('chat');
-        //this.#channel.trigger('chat', 'NewChatMessage', { message: '' });
+    #closeChatConnection() {
+        if (this.#channel) this.#channel.unsubscribe();
+    }
+
+    #connect() {
+        return new Promise((resolve, reject) => {
+            this.#closeChatConnection();
+            const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
+                cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER
+            });
+
+            this.#channel = pusher.subscribe('chat'+this.#activeConversation);
+
+            this.#channel.bind('pusher:subscription_succeeded', () => {
+                //console.log('Pusher connection established');
+                resolve();
+            });
+
+            pusher.connection.bind('error', (err) => {
+                //console.error('Pusher connection error:', err);
+                reject(err);
+            });
+        });
+    }
+
+    #listenConversationClose(){
+        document.querySelectorAll('.conversation-close').forEach(element =>{
+            element.addEventListener('click', () => {
+                this.#conversationToClose = element.getAttribute('data-conversation-id');
+            });
+        });
+    }
+
+    #conversationCloseConfirm(){
+
+        //this.#conversationToClose
     }
 
     #listenChatOpen(){
@@ -74,6 +115,11 @@ class SupportChat {
             element.addEventListener('click', ()=>{
                 const conversation_id = element.getAttribute('data-conversation-id');
                 this.#activeConversation = conversation_id;
+                this.#connect()
+                    .then(() => {
+                        this.#listenNewMessage();
+                    });
+
                 const options = {
                     method: 'POST',
                     headers: {
@@ -90,19 +136,22 @@ class SupportChat {
         });
     }
 
+    #loadAudio(){
+        this.#audio = new Audio('/sounds/sound_1.mp3');
+    }
+
+
     #listenEvents(){
-        this.#connect();
         this.#listenChatOpen();
         this.#listenMessageSend();
-        this.#listenNewMessage();
-
 
     }
 
     constructor() {
         this.#activeConversation = null;
+        this.#conversationToClose = null;
         this.#listenEvents();
-
+        this.#loadAudio();
     }
 
 }

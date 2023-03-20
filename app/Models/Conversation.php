@@ -9,9 +9,12 @@ class Conversation extends Model
 {
     use HasFactory;
     protected $table = 'conversations';
-    protected $fillable = ['app_id', 'visitor_id', 'agent_id', 'status'];
+    protected $fillable = ['id', 'app_id', 'visitor_id', 'agent_id', 'status'];
     protected $casts = [
         'id' => 'string'
     ];
+
+    //protected $keyType = 'string';
+
 
 }

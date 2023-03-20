@@ -19,17 +19,19 @@ class NewChatMessage implements ShouldBroadcast
     public $message;
     public $status;
     public $is_support_agent;
+    public $conversationId;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $isSupportAgent)
+    public function __construct($message, $isSupportAgent, $conversationId)
     {
         $this->status = "ok";
         $this->message = $message;
         $this->is_support_agent = $isSupportAgent;
+        $this->conversationId = $conversationId;
     }
 
     /**
@@ -39,7 +41,7 @@ class NewChatMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['chat'];
+        return ['chat'.$this->conversationId];
     }
 
     public function broadcastAs()
