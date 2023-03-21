@@ -233,14 +233,14 @@
                                         <textarea class="form-control" name="message_box" aria-label="With textarea">{{ $chat->message_box }}</textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" id="submit-button">Save</button>
+                                <button type="submit" class="btn btn-primary" id="submit-button" onclick="livechatSavePreferences()">Save</button>
                             </form>
                         </div>
                     </div>
 
 
                     <div class="col d-flex justify-content-center align-items-center">
-                        <div class="livechat-container">
+                        <div class="livechat-container-preview">
                             <div class="livechat-header" style="background-color: {{ $chat->chat_color }}">
                                 <div id="livechat-header-information">
                                     <span class="livechat-text-color" id="livechat-title" >{{ $chat->chat_title }}</span>

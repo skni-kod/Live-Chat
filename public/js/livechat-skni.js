@@ -40,27 +40,27 @@ function livechatToggleChat() {
     });
 }
 
-document.getElementById('submit-button').addEventListener('click', function() {
-    var color = document.querySelector('#livechat-preset-colors input[type="color"]').value;
-    var form = document.getElementById('livechat-settings-form');
-    var formData = new FormData(form);
 
-    formData.set('color', color);
+function livechatSavePreferences(){
+        let color = document.querySelector('#livechat-preset-colors input[type="color"]').value;
+        let form = document.getElementById('livechat-settings-form');
+        let formData = new FormData(form);
 
-    var selectedOption = document.getElementById('selected_option').value;
-    formData.set('livechat-position-selector', selectedOption);
+        formData.set('color', color);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action, true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            alert('Settings saved successfully.');
-        } else {
-            alert('There was an error while saving the settings.');
-        }
-    };
-    xhr.send(formData);
+        let selectedOption = document.getElementById('selected_option').value;
+        formData.set('livechat-position-selector', selectedOption);
 
-    return false;
-});
+        let xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('Settings saved successfully.');
+            } else {
+                alert('There was an error while saving the settings.');
+            }
+        };
+        xhr.send(formData);
 
+        return false;
+}
