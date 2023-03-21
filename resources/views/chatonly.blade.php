@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="../js/livechat-skni.js"></script>
+
 </head>
 
 <body>
@@ -24,7 +26,7 @@
         </div>
         <div id="livechat-close">
             <button id="livechat-close-btn">
-                X
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
     </div>
@@ -118,6 +120,11 @@
     </div>
 </div>
 
+    <a id="livechat-expand-btn" onclick="livechatToggleChat()">
+        <i class="fa-solid fa-comment"></i>
+    </a>
+
+    <script src="https://kit.fontawesome.com/dfb9cee77f.js" crossorigin="anonymous"></script>
 
 </body>
 

@@ -6,10 +6,6 @@
     background-size: 20px 20px;
     background-position: 0 0,10px 10px;
 }
-.livechat-container
-{
-    font-family: 'Roboto', sans-serif;
-}
 
 .livechat-label-options
 {
@@ -110,7 +106,9 @@
 /* Styl czatu który będzie na innych stronach */
 .livechat-container
 {
-    position: relative;
+    font-family: 'Roboto', sans-serif;
+    right: -430px;
+    bottom: 10px;
     border-style: solid;
     border-color: #E0E0E0;
     border-width: 1px;
@@ -121,6 +119,12 @@
     margin-right: 0px;
     z-index: 9999 !important;
     overflow: hidden;
+    position: fixed !important;
+    transition: right 0.2s ease-in-out;
+}
+
+.livechat-container.expanded {
+    right: 30px;
 }
 
 .livechat-header
@@ -286,4 +290,24 @@
 {
     font-size: 15px;
     padding: 15px;
+}
+
+#livechat-chat-area
+{
+
+}
+
+
+#livechat-expand-btn
+{
+    background: #fff;
+    border-radius: 50%;
+    bottom: 30px;
+    right: 30px;
+    font-size: 1.25rem;
+    z-index: 990;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    position: fixed !important;
+    padding: 1.5rem;
 }

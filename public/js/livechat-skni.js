@@ -25,6 +25,20 @@ function setChatPosition(position) {
     selectedOptionInput.value = position;
 }
 
+function livechatToggleChat() {
+    let expandButton = document.getElementById('livechat-expand-btn');
+    let chatContainer = document.querySelector('.livechat-container');
+
+    expandButton.addEventListener('click', () => {
+        chatContainer.classList.toggle('expanded');
+    });
+
+    let closeButton = document.getElementById('livechat-close-btn');
+
+    closeButton.addEventListener('click', () => {
+        chatContainer.classList.remove('expanded');
+    });
+}
 
 document.getElementById('submit-button').addEventListener('click', function() {
     var color = document.querySelector('#livechat-preset-colors input[type="color"]').value;
