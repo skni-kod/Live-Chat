@@ -171,11 +171,10 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
                                     <h5 class="font-weight-bolder">
-                                        2,300
+                                        {{ $visitorCountToday }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
+                                        <span class="text-sm font-weight-bolder"> Visitor count {{ $percentChange }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -196,11 +195,10 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        {{$visitorCountNew}}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
+                                        <span class="text-sm font-weight-bolder"> New visitors count {{ $percentChangeNew }}</span>
                                     </p>
                                 </div>
                             </div>

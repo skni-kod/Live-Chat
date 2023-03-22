@@ -55,6 +55,31 @@ class HomeController extends Controller
         $user = auth()->user();
         $appId = DB::table('teams')->where('team_creator', '=', $user->id)->value('app_id');
         $conversations = $this->getConversations($user->id);
-        return view('dashboard', ['app_id' => $appId, 'conversations' => $conversations]);
+
+        $visitorCountToday = app('App\Http\Controllers\VisitorController')->countVisitorsToday()->getData()->count;
+        $lastWeekCount = app('App\Http\Controllers\VisitorController')->countVisitorsLastWeek()->getData()->count;
+
+        if ($lastWeekCount != 0) {
+            $percentChange = ($visitorCountToday - $lastWeekCount) / $lastWeekCount * 100;
+        } else {
+            $percentChange = 0;
+        }
+        $percentChangeStr = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
+
+        $visitorCountNew = app('App\Http\Controllers\VisitorController')->countNewVisitors()->getData()->count;
+        $lastWeekNewCount = app('App\Http\Controllers\VisitorController')->countNewVisitorsLastWeek()->getData()->count;
+        if ($lastWeekNewCount != 0) {
+            $percentChange = ($visitorCountNew - $lastWeekNewCount) / $lastWeekNewCount * 100;
+        } else {
+            $percentChange = 0;
+        }
+        $percentChangeStrNew = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
+
+        return view('dashboard', ['app_id' => $appId,
+                                        'visitorCountToday' => $visitorCountToday,
+                                        'percentChange' => $percentChangeStr,
+                                        'visitorCountNew' => $visitorCountNew,
+                                        'percentChangeNew' => $percentChangeStrNew,
+                                        'conversations' => $conversations]);
     }
 }
