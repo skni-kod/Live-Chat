@@ -25,7 +25,7 @@ class HomeController extends Controller
 
         $conversations = DB::table('conversations as c')
             ->leftJoin('teams as t', 'c.app_id', '=', 't.app_id')
-            ->leftJoin(DB::raw('(SELECT message, conversation_id FROM messages ORDER BY created_at DESC LIMIT 1) as m'), function($join) {
+            ->rightJoin(DB::raw('(SELECT message, conversation_id, created_at AS last_message_created_at FROM messages WHERE created_at IN (SELECT MAX(created_at) FROM messages GROUP BY conversation_id)) as m'), function($join) {
                 $join->on('c.id', '=', 'm.conversation_id');
             })
             ->where(function($query) use ($userId) {
