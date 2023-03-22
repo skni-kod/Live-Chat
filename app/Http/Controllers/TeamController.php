@@ -93,25 +93,31 @@ class TeamController extends Controller
         return redirect()->back();
     }
 
-    public function join(Request $request)
-    {
-        $joinCode = $request->input('team_code');
+        public function join(Request $request)
+        {
+            $joinCode = $request->input('team_code');
 
-        $team = Team::where('join_code', $joinCode)->first();
+            $team = Team::where('join_code', $joinCode)->firstOrFail();
 
-        if (!$team) {
-            return redirect()->back()->withErrors(['team_code' => 'Nie znaleziono drużyny z podanym kodem']);
+            if (!$team) {
+                return redirect()->back()->withErrors(['team_code' => 'Nie znaleziono drużyny z podanym kodem']);
+            }
+
+            $isMember = TeamMember::where('team_id', $team->id)
+                ->where('user_id', Auth::user()->id)
+                ->exists();
+
+            if ($isMember) {
+                return redirect()->back()->withErrors(['team_code' => 'Jesteś już członkiem tej drużyny']);
+            }
+            $teamMember = new TeamMember([
+                'user_id' => Auth::user()->id,
+            ]);
+
+            TeamMember::where('user_id', Auth::user()->id)->delete();
+
+            $team->members()->save($teamMember);
+
+            return redirect()->back();
         }
-
-        $isMember = $team->members()->where('user_id', Auth::user()->id)->exists();
-
-        if ($isMember) {
-            return redirect()->back()->withErrors(['team_code' => 'Jesteś już członkiem tej drużyny']);
-        }
-        $team->members()->create([
-            'user_id' => Auth::user()->id,
-        ]);
-
-        return redirect()->back();
-    }
 }
