@@ -264,13 +264,19 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Dołącz do istniejącego zespołu</h5>
-                            <div class="form-group">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Podaj kod zespołu</span>
-                                    <input type="text" class="form-control" placeholder="Wpisz kod" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <form action="{{ route('teams.join') }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Podaj kod zespołu</span>
+                                        <input type="text" class="form-control @error('team_code') is-invalid @enderror" name="team_code" placeholder="Wpisz kod" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                        @error('team_code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <a href="#" class="btn btn-primary">Dołącz</a>
+                                <button type="submit" class="btn btn-primary">Dołącz</button>
+                            </form>
                         </div>
                     </div>
                 </div>

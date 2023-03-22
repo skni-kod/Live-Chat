@@ -43,8 +43,7 @@ Route::get('/chatonly',  [App\Http\Controllers\ChatSettingsController::class, 's
 Route::get('/team', [App\Http\Controllers\TeamController::class, 'index'])->name('team');
 Route::post('/team/remove', [App\Http\Controllers\TeamController::class, 'removeMember'])->name('team.remove');
 Route::post('/teams/generate-code', [App\Http\Controllers\TeamController::class, 'generateCode'])->name('team.generatecode');
-
-
+Route::post('/teams/join', [App\Http\Controllers\TeamController::class, 'join'])->name('teams.join');
 
 Route::prefix('chat')->group(function () {
     Route::get('settings', [ChatSettingsController::class, 'edit'])->name('chat-settings.edit');

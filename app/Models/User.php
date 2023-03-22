@@ -35,4 +35,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Team::class, 'team_members', 'user_id', 'team_id');
     }
+
 }
