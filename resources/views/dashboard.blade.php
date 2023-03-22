@@ -171,10 +171,10 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
                                     <h5 class="font-weight-bolder">
-                                        {{ $visitorCountToday }}
+                                        {{ $statisticData['visitorCountToday']}}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-sm font-weight-bolder"> Visitor count {{ $percentChange }}</span>
+                                        <span class="text-sm font-weight-bolder"> Visitor count {{ $statisticData['percentChangeStr'] }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -195,10 +195,10 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        {{$visitorCountNew}}
+                                        {{ $statisticData['visitorCountNew']}}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-sm font-weight-bolder"> New visitors count {{ $percentChangeNew }}</span>
+                                        <span class="text-sm font-weight-bolder"> New visitors count {{ $statisticData['percentChangeStrNew'] }}</span>
                                     </p>
                                 </div>
                             </div>
@@ -288,7 +288,7 @@
                         <div class="card-body">
                             <h3 class="card-title mb-3">Instalacja</h3>
                             <p>Aby korzystać z czatu wystarczy, że załączysz poniższy kod JS na swojej stronie: </p>
-                            <pre id="installation" class="language-js"><code>&lt;script src=&quot;https:/strona.pl&quot;&gt;&lt;/script&gt;</code><br><code>&lt;script&gt;const chat = new LiveChat(&quot;{{$app_id}}&quot;);&lt;/script&gt;</code></pre>
+                            <pre id="installation" class="language-js"><code>&lt;script src=&quot;https://www.strona.pl&quot;&gt;&lt;/script&gt;</code><br><code>&lt;script&gt;const chat = new LiveChat(&quot;{{$app_id}}&quot;);&lt;/script&gt;</code></pre>
                             <button id="copy_installation" class="btn btn-primary mt-2">Kopiuj kod</button>
                         </div>
                     </div>
@@ -447,7 +447,22 @@
 
                         </ul>
                     </div>
-                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <p><strong>Adres IP:</strong></p>
+                            <p> {{ $visitorData['ip'] }}</p>
+                        <p><strong>Miasto:</strong></p>
+                            <p> {{ $visitorData['city'] }}</p>
+                        <p><strong>Kraj:</strong></p>
+                            <p> {{ $visitorData['country'] }}</p>
+                        <p><strong>System operacyjny</strong></p>
+                            <p> {{ $visitorData['system'] }}</p>
+                        <p><strong>Przeglądarka</strong></p>
+                            <p> {{ $visitorData['browser'] }}</p>
+                        <p><strong>Wersja przeglądarki</strong></p>
+                            <p> {{ $visitorData['browser_version'] }}</p>
+                        <p><strong>Ilość odwiedziń:</strong></p>
+                            <p> {{ $visitorData['visits'] }}</p>
+                    </div>
                 </div>
 
 
