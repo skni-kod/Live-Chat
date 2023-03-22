@@ -314,7 +314,7 @@
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">Data</p>
+                                        <p class="text-sm mb-0 text-uppercase font-weight-bold">{{$conversation->last_message_created_at}}</p>
                                         <h5 class="font-weight-bolder">
                                             Nazwa strony
                                         </h5>

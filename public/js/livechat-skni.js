@@ -29,9 +29,7 @@ function livechatToggleChat() {
     let expandButton = document.getElementById('livechat-expand-btn');
     let chatContainer = document.querySelector('.livechat-container');
 
-    expandButton.addEventListener('click', () => {
-        chatContainer.classList.toggle('expanded');
-    });
+    chatContainer.classList.toggle('expanded');
 
     let closeButton = document.getElementById('livechat-close-btn');
 
