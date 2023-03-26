@@ -56,30 +56,14 @@ class HomeController extends Controller
         $appId = DB::table('teams')->where('team_creator', '=', $user->id)->value('app_id');
         $conversations = $this->getConversations($user->id);
 
-        $visitorCountToday = app('App\Http\Controllers\VisitorController')->countVisitorsToday()->getData()->count;
-        $lastWeekCount = app('App\Http\Controllers\VisitorController')->countVisitorsLastWeek()->getData()->count;
+        $statisticData = app('App\Http\Controllers\VisitorController')->getStatistics();
 
-        if ($lastWeekCount != 0) {
-            $percentChange = ($visitorCountToday - $lastWeekCount) / $lastWeekCount * 100;
-        } else {
-            $percentChange = 0;
-        }
-        $percentChangeStr = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
-
-        $visitorCountNew = app('App\Http\Controllers\VisitorController')->countNewVisitors()->getData()->count;
-        $lastWeekNewCount = app('App\Http\Controllers\VisitorController')->countNewVisitorsLastWeek()->getData()->count;
-        if ($lastWeekNewCount != 0) {
-            $percentChange = ($visitorCountNew - $lastWeekNewCount) / $lastWeekNewCount * 100;
-        } else {
-            $percentChange = 0;
-        }
-        $percentChangeStrNew = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
+        $visitorData = app('App\Http\Controllers\VisitorController')->getVisitorData();
 
         return view('dashboard', ['app_id' => $appId,
-                                        'visitorCountToday' => $visitorCountToday,
-                                        'percentChange' => $percentChangeStr,
-                                        'visitorCountNew' => $visitorCountNew,
-                                        'percentChangeNew' => $percentChangeStrNew,
-                                        'conversations' => $conversations]);
+                                        'statisticData' => $statisticData,
+                                        'conversations' => $conversations,
+                                        'visitorData' => $visitorData
+        ]);
     }
 }
