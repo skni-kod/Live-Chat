@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use Ramsey\Uuid\Uuid;
+use Stevebauman\Location\Facades\Location;
 
 class ClientConversationController extends ConversationController
 {
@@ -18,9 +19,9 @@ class ClientConversationController extends ConversationController
         if (!$request->filled('user_id', 'app_id', 'user_data')) return false;
     }
 
-    private function updateVisitorData($visitorid)
+    private function updateVisitorData($data)
     {
-        Visitor::updateOrCreate(['visitor_id' => $visitorid], ['ip' => '', 'city' => '', 'country' => '', 'system' => '', 'browser' => '', 'browser_version' => '', 'visits' => 0, 'chats' => 0]);
+        Visitor::updateOrCreate(['visitor_id' => $data['visitor_id']], ['ip' => $data['ip'], 'city' => $data['city'], 'country' => $data['country'], 'system' => $data['system'], 'browser' => $data['browser'], 'browser_version' => $data['browser_version'], 'visits' => 0, 'chats' => 0]);
 
     }
 
@@ -43,13 +44,27 @@ class ClientConversationController extends ConversationController
         return [];
     }
 
-    public function loadBaseConversation($visitorId, $appId)
+    public function loadBaseConversation(Request $request, $visitorId, $appId)
     {
         $agent = new Agent();
         $platform = $agent->platform();
         $browser = $agent->browser();
         $version = $agent->version($browser);
-        $this->updateVisitorData($visitorId);
+        $ip = $request->ip();
+        $currentUserInfo = Location::get($ip);
+        $city = $currentUserInfo->cityName ?? '';
+        $country = $currentUserInfo->countryName ?? '';
+        $data = [
+            'ip' => $ip,
+            'visitor_id' => $visitorId,
+            'city' => $city,
+            'country' => $country,
+            'system' => $platform,
+            'browser' => $browser,
+            'browser_version' => $version
+        ];
+
+        $this->updateVisitorData($data);
         $messages = $this->loadConversationMessages($visitorId);
         $chatService = new ChatService();
         $chat = $chatService->getChatSettingsByAppid($appId);

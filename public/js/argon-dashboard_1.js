@@ -105,7 +105,7 @@ if (document.querySelector('.fixed-plugin')) {
   })
 
   document.querySelector('body').onclick = function(e) {
-    if (e.target != fixedPluginButton && e.target != fixedPluginButtonNav && e.target.closest('.fixed-plugin .card') != fixedPluginCard) {
+    if (e.target !== fixedPluginButton && e.target !== fixedPluginButtonNav && e.target.closest('.fixed-plugin .card') !== fixedPluginCard) {
       fixedPlugin.classList.remove('show');
     }
   }

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Conversation;
 
+use App\Events\SupportCall;
 use App\Http\Controllers\Controller;
+use App\Services\ChatService;
 use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\Message;
 use App\Events\NewChatMessage;
+use Illuminate\Support\Facades\DB;
 
 abstract class ConversationController extends Controller
 {
@@ -34,6 +37,8 @@ abstract class ConversationController extends Controller
         $isSupportAgent = !is_null($agentId);
 
         event(new NewChatMessage($message, $isSupportAgent, $conversationId));
+        $chatService = new ChatService();
+        $chatService->supportChatsRefresh($conversationId);
 
         return response()->json([], 200);
     }

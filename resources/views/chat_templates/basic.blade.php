@@ -1,4 +1,4 @@
-<div class="livechat-container">
+<div class="livechat-container expanded">
     <div class="livechat-header" style="background-color: {{ $chat->chat_color }}">
         <div id="livechat-header-information">
             <span class="livechat-text-color" id="livechat-title" >{{ $chat->chat_title }}</span>

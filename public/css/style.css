@@ -1,0 +1,29 @@
+.chat-blink {
+    position: relative;
+}
+
+.chat-blink:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 3px solid red;
+    border-radius: 12px;
+    animation: blink 1.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes blink {
+    0% {
+        border-color: red;
+    }
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: red;
+    }
+}

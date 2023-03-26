@@ -41,6 +41,10 @@ class LiveChat{
         return visitorId;
     }
 
+    #setAlreadyVisited(){
+        sessionStorage.setItem('');
+    }
+
     #setVisits(number_of_visits){
         localStorage.setItem('visits', number_of_visits);
     }
@@ -205,6 +209,7 @@ class LiveChat{
         head.appendChild(link);
         document.body.insertAdjacentHTML("beforeend", data.data.chat_html);
         this.#insertMessages(data.data.messages);
+
     }
 
     #loadConversation(){
