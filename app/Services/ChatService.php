@@ -31,13 +31,14 @@ class ChatService{
             ->first();
     }
 
-    public function getConversationById($conversationId){
+    public function getConversations($conversationsId){
         return DB::table('conversations as c')
             ->rightJoin(DB::raw('(SELECT message, conversation_id, created_at AS last_message_created_at FROM messages WHERE created_at IN (SELECT MAX(created_at) FROM messages GROUP BY conversation_id)) AS m '), function($join){
                 $join->on('c.id', '=', 'm.conversation_id');
             })
-            ->where('c.id', '=', $conversationId)
-            ->first();
+            ->leftJoin('visitors', 'visitors.visitor_id', '=', 'c.visitor_id')
+            ->whereIn('c.id',  $conversationsId)
+            ->get();
     }
 
     private function getSupportChannels($conversationId){
@@ -59,7 +60,25 @@ class ChatService{
 
     public function supportChatsRefresh($conversationId, $isSupportAgent = false){
         $supportChannels = $this->getSupportChannels($conversationId);
-        $conversationData = $this->getConversationById($conversationId);
+        $conversationData = $this->getConversations([$conversationId])[0];
         event(new SupportCall($supportChannels, $conversationData, $isSupportAgent));
+    }
+
+    public static function agentConversationExist($userId, $conversationId){
+        return DB::table('conversations')
+            ->where('app_id', '=', function ($query) use ($userId) {
+                $query->select('app_id')
+                    ->from('teams')
+                    ->where('id', '=', function ($query) use ($userId) {
+                        $query->select('team_id')
+                            ->from('team_members')
+                            ->where('user_id', '=', $userId);
+                    });
+            })
+            ->where('id', '=', $conversationId)
+            ->where(function($query) use ($userId){
+                $query->orWhere('agent_id', '=', $userId)->orWhereNull('agent_id');
+            })
+            ->exists();
     }
 }

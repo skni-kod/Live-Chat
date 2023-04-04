@@ -52,6 +52,8 @@ class TeamController extends Controller
 
     public function removeMember(Request $request)
     {
+        if(!filled($request->user_id)) return redirect()->back()->withErrors(['kick_error' => 'Wybierz użytkownika, którego chcesz wyrzucić']);
+        if($request->user_id == Auth::user()->id) return redirect()->back()->withErrors(['kick_error' => 'Nie możesz wyrzucić siebie z zespołu']);
         $currentTeamId = Team::join('team_members', 'teams.id', '=', 'team_members.team_id')
             ->where('team_members.user_id', Auth::user()->id)
             ->value('teams.id');
@@ -95,23 +97,24 @@ class TeamController extends Controller
 
         public function join(Request $request)
         {
-            $joinCode = $request->input('team_code');
 
-            $team = Team::where('join_code', $joinCode)->firstOrFail();
+            if(!filled($request->team_code)) return redirect()->back()->withErrors(['team_code' => 'Podaj prawidłowy kod drużyny']);
+            $joinCode = $request->team_code;
 
-            if (!$team) {
-                return redirect()->back()->withErrors(['team_code' => 'Nie znaleziono drużyny z podanym kodem']);
-            }
+            $team = Team::where('join_code', $joinCode)->get();
 
-            $isMember = TeamMember::where('team_id', $team->id)
+            if ($team->count() === 0) return redirect()->back()->withErrors(['team_code' => 'Nie znaleziono drużyny z podanym kodem']);
+
+            $isMember = TeamMember::where('team_id', $team[0]->id)
                 ->where('user_id', Auth::user()->id)
                 ->exists();
 
             if ($isMember) {
-                return redirect()->back()->withErrors(['team_code' => 'Jesteś już członkiem tej drużyny']);
+                return redirect()->back()->withErrors(['team_code' => 'Jesteś już członkiem tego zespołu']);
             }
             $teamMember = new TeamMember([
-                'user_id' => Auth::user()->id,
+                'user_id' => auth()->user()->id,
+                'edit_chat_settings' => 0
             ]);
 
             TeamMember::where('user_id', Auth::user()->id)->delete();
@@ -119,5 +122,9 @@ class TeamController extends Controller
             $team->members()->save($teamMember);
 
             return redirect()->back();
+        }
+
+        public function __construct(){
+            $this->middleware('auth');
         }
 }

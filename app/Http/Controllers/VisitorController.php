@@ -71,26 +71,4 @@ class VisitorController extends Controller
 
         return view('dashboard', ['visitorData' => $visitorData]);
     }
-
-    public function getVisitorData()
-    {
-        $visitor = Visitor::firstOrCreate([]);
-
-        $ip = $visitor->ip;
-        $city = $visitor->city;
-        $country = $visitor->country;
-        $system =$visitor->system;
-        $browser= $visitor->browser;
-        $browser_version = $visitor->browser_version;
-        $visits = $visitor->visits;
-
-            return ['ip' => $ip,
-                    'city' => $city,
-                    'country' => $country,
-                    'system' => $system,
-                    'browser' => $browser,
-                    'browser_version' => $browser_version,
-                    'visits' => $visits,
-            ];
-    }
 }

@@ -13,14 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 abstract class ConversationController extends Controller
 {
-    abstract public function joinConversation(Request $request);
-    abstract protected function loadConversationMessages($chat_user);
     abstract public function sendMessage(Request $request);
-
-    protected function getConversationAgent($appid){
-        return 2;
-        //Team::select('')->where('app_id', '=', $appid)->get();
-    }
 
     protected function getConversationMessages($conversationId){
         return Message::where('conversation_id', '=', $conversationId)->get();

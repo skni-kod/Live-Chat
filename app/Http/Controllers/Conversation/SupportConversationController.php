@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Conversation;
 use App\Http\Controllers\Controller;
 use App\Models\Conversation;
 use App\Models\Visitor;
+use App\Services\ChatService;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use Illuminate\Support\Facades\Validator;
@@ -12,15 +13,9 @@ use Illuminate\Support\Facades\Validator;
 
 class SupportConversationController extends ConversationController
 {
-
-    protected function loadConversationMessages($chat_user){
-
-    }
-
     public function sendMessage(Request $request){
-        //Do poprawy walidacja, wartości z configa
         $rules = [
-          'conversation_id' => 'required|string|exists:conversations,id,agent_id,' . auth()->user()->id, 'message' => 'required|string|max:200'
+          'conversation_id' => 'required|string|exists:conversations,id,agent_id,' . auth()->user()->id, 'message' => 'required|string|max:'.config('conversation.message_max_length')
         ];
 
         $json = $request->getContent();
@@ -37,7 +32,10 @@ class SupportConversationController extends ConversationController
     public function joinConversation(Request $request)
     {
         $agent_id = auth()->user()->id;
-        Conversation::where('id', '=', $request->input('conversation_id'))
+        if(!$request->has('conversation_id')) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji']);
+        $conversationId = $request->input('conversation_id');
+        if(!$this->conversationExist($conversationId)) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji']);
+        Conversation::where('id', '=', $conversationId)
             ->update(['agent_id' => $agent_id]);
 
         $messages = $this->getConversationMessages($request->input('conversation_id'));
@@ -46,6 +44,34 @@ class SupportConversationController extends ConversationController
             'data' => $messages
         ];
         return response()->json($response);
+    }
+
+    public function getFullConversationList(){
+        $agentConversations = Conversation::select('id')->where('agent_id', '=', auth()->user()->id)->orWhereNull('agent_id')->get()->pluck('id');
+        $chatService = new ChatService();
+        $chats = $chatService->getConversations($agentConversations);
+        $response = [
+            'status' => 'ok',
+            'data' => $chats
+        ];
+        return response()->json($response);
+    }
+
+    private function conversationExist($conversationId){
+        return ChatService::agentConversationExist(auth()->user()->id, $conversationId);
+    }
+
+    private function setConversationClosedState($conversationId){
+        Conversation::where('id', '=', $conversationId)->update(['status' => 'closed']);
+        $chatService = new ChatService();
+        $chatService->supportChatsRefresh($conversationId, true);
+    }
+
+    public function closeConversation(Request $request){
+        if(!filled($request->conversation_id)) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji'], 400);
+        if(!$this->conversationExist($request->conversation_id)) return response()->json(['status' => 'error', 'message' => 'Podana konwersacja nie istnieje'], 400);
+        $this->setConversationClosedState($request->conversation_id);
+        return response()->json(['status' => 'ok', 'Konwersacja została zamknięta']);
     }
 
 }

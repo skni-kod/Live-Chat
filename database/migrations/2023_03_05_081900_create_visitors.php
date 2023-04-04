@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('system', 50);
             $table->string('browser', 20);
             $table->string('browser_version', 30);
-            $table->integer('visits');
+            $table->integer('visits')->default(0);
             $table->integer('chats');
             $table->timestamps();
         });

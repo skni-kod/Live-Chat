@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\WebsocketEvent;
+use App\Models\Conversation;
+use App\Services\ChatService;
 use Illuminate\Http\Request;
 use Pusher\Pusher;
 use Illuminate\Support\Facades\DB;
+use App\Models\TeamMember;
 
 class HomeController extends Controller
 {
@@ -17,6 +20,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    private function getAgentConversations(){
+        $agentConversations = Conversation::select('id')->where('agent_id', '=', auth()->user()->id)->orWhereNull('agent_id')->get()->pluck('id');
+
+        $chatService = new ChatService();
+        return $chatService->getConversations($agentConversations);
     }
 
     private function getConversations($userId){
@@ -45,6 +55,29 @@ class HomeController extends Controller
         return $groupedConversations;
     }
 
+    private function countAgents(){
+        $userId = auth()->user()->id;
+
+        $countWithUpdatedAt = TeamMember::where('team_id', function ($query) use ($userId) {
+            $query->select('team_id')
+                ->from('team_members')
+                ->where('user_id', $userId);
+        })
+            ->when(true, function ($query) {
+                return $query->where('updated_at', '>=', now()->subWeek());
+            })
+            ->count();
+
+        $countWithoutUpdatedAt = TeamMember::where('team_id', function ($query) use ($userId) {
+            $query->select('team_id')
+                ->from('team_members')
+                ->where('user_id', $userId);
+        })
+            ->count();
+
+        return [$countWithUpdatedAt, $countWithoutUpdatedAt];
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -54,16 +87,15 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $appId = DB::table('teams')->where('team_creator', '=', $user->id)->value('app_id');
-        $conversations = $this->getConversations($user->id);
+        $conversations = $this->getAgentConversations();
 
         $statisticData = app('App\Http\Controllers\VisitorController')->getStatistics();
 
-        $visitorData = app('App\Http\Controllers\VisitorController')->getVisitorData();
 
         return view('dashboard', ['app_id' => $appId,
                                         'statisticData' => $statisticData,
                                         'conversations' => $conversations,
-                                        'visitorData' => $visitorData
+            'agentsCount' => $this->countAgents()
         ]);
     }
 }

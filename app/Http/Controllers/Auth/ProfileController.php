@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -35,16 +36,22 @@ class ProfileController extends Controller
         return back()->with('success', 'Avatar uploaded successfully.');
     }
 
-    public function updateProfile(Request $request, $id)
+
+    public function updateProfile(Request $request)
     {
-        $user = User::find($id);
+        $validator = Validator::make($request->all(), [
+            'username' => ['required', 'string', 'max:'.config('account.username_max_length'), 'min:'.config('account.username_min_length')],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'shownName' => ['required', 'string', 'max:50']
+        ]);
 
-        $user->name = $request->input('username');
-        $user->email = $request->input('email');
+        if ($validator->fails()) return redirect()->back()->withErrors(['profile_error' => $validator->errors()->first()]);
+        $name = $request->input('username');
+        $email = $request->input('email');
+        $shownName = $request->input('shownName');
 
-        $user->save();
-
-        Profile::where('user_id', $id)->update(['name' => $request->input('shownName')]);
+        Profile::where('user_id', auth()->user()->id)->update(['name' => $shownName]);
+        User::where('id', auth()->user()->id)->update(['email' => $email, 'name' => $name]);
 
         return back()->with('success', 'Data updated successfully!');
     }

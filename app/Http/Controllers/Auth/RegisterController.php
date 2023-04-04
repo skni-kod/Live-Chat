@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\TeamMember;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Profile;
@@ -54,7 +55,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:'.config('account.username_max_length'), 'min:'.config('account.username_min_length')],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'terms_accept' => ['required', 'boolean', 'in:1']

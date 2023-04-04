@@ -8,23 +8,15 @@
                     <h5 class="mb-1">
                         {{$user->profile->name}} alias. {{$user->name}}
                     </h5>
-                    <p class="mb-0 font-weight-bold text-sm">
-                        Rola
-                    </p>
-                </div>
-                <div class="col-4 text-end">
-                    <button type="button" class="btn btn-success">Napisz</button>
                 </div>
             </div>
         </div>
     </div>
-
-
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form method="POST" action="{{ route('profile.update', $user->id) }}">
+                    <form method="POST" action="{{ route('profile.update')}}">
                         @csrf
                         @method('PUT')
                         <div class="card-header pb-0">
@@ -34,7 +26,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p class="text-uppercase text-sm">User Information</p>
+                            <p class="text-uppercase text-sm">Dane użytkownika</p>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -57,21 +49,10 @@
                                                name="shownName">
                                     </div>
                                 </div>
+                                @error('profile_error')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">O mnie</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">O mnie</label>
-                                        <input class="form-control" type="text"
-                                               value="Tutaj będzie kiedyś cytat/biografia" name="aboutme">
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="float-end">
-                                <button type="button" class="btn btn-danger">Usuń konto</button>
-                            </p>
                         </div>
                     </form>
                 </div>
@@ -79,8 +60,12 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     @if ($user->profile->avatar)
-                        <img src="{{ asset('storage/avatars/' . $user->profile->avatar) }}" alt="Image placeholder"
-                             class="card-img-top">
+                        <div class="row">
+                            <div class="col-6 mx-auto">
+                                <img src="{{ asset('img/' . $user->profile->avatar) }}" alt="Image placeholder" class="img-fluid card-img-top">
+                            </div>
+                        </div>
+
                     @endif
 
                     <div class="card-body pt-0">
@@ -88,12 +73,6 @@
                             <h5>
                                 {{$user->profile->name}}
                             </h5>
-                            <div class="h6 font-weight-300">
-                                Rola
-                            </div>
-                            <div>
-                                Może jakiś cytat lub coś
-                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
