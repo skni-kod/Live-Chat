@@ -1,6 +1,6 @@
 import Pusher from 'pusher-js';
 
-class LiveChat {
+export class LiveChat {
     #appId;
     #variables;
     #channel;
@@ -258,5 +258,7 @@ class LiveChat {
         this.#variables[name] = value;
     }
 }
+
+const live_chat = new LiveChat('clg7DzZsJ1GhmvIg');
 
 
