@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Testowy chat od strony klienta</title>
-    @vite(['resources/js/live-chat.js'])
+    @vite(['resources/js/test_usage.js'])
 </head>
 <body>
 <button id="live_chat">Otwórz chat</button>

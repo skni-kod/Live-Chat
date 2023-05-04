@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('conversations', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('UUID()'));
+            $table->uuid('id')->primary()->default(DB::raw("LOWER(REPLACE('" . uniqid('', true) . "', '-', ''))"));
             $table->string('app_id', 16);
             $table->foreign('app_id')->references('app_id')->on('teams')->onDelete('cascade');
             $table->string('visitor_id')->nullable();

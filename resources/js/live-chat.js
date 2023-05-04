@@ -66,7 +66,6 @@ export class LiveChat {
         this.#channel.bind('NewChatMessage', function (data) {
             this.#insertMessage(data.message, '', data.is_support_agent);
         }.bind(this));
-        //console.log("polaczenie z konwersacja");
     }
 
     #updateVisits() {
@@ -243,9 +242,6 @@ export class LiveChat {
     #listenEvents() {
         this.#listenPageLoad();
         this.#listenChatOpen();
-        //this.#connectConversation();
-        //this.#listenMessageSend();
-        //this.#connectConversation();
     }
 
     constructor(appId, variables = {}) {
@@ -259,6 +255,5 @@ export class LiveChat {
     }
 }
 
-const live_chat = new LiveChat('clg7DzZsJ1GhmvIg');
 
 

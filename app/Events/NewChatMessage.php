@@ -34,11 +34,6 @@ class NewChatMessage implements ShouldBroadcast
         $this->conversationId = $conversationId;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
         return ['chat'.$this->conversationId];
