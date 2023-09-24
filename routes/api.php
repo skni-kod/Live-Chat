@@ -22,3 +22,4 @@ Route::post('/load-chat/{appId}', [App\Http\Controllers\Conversation\ClientConve
 Route::post('/create-conversation', [App\Http\Controllers\Conversation\ClientConversationController::class, 'createConversation']);
 
 Route::post('/client-message', [App\Http\Controllers\Conversation\ClientConversationController::class, 'sendMessage']);
+Route::post('/close-conversation', [App\Http\Controllers\Conversation\ClientConversationController::class, 'closeConversation']);

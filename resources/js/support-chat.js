@@ -68,6 +68,7 @@ class SupportChat {
     }
 
     #listenMessageSend(){
+        
         document.querySelector('#send-message').addEventListener('click', this.#handleSendMessage.bind(this));
     }
 
@@ -255,8 +256,12 @@ class SupportChat {
         }
         else clonedElement.querySelector('.close_conversation').setAttribute('data-conversation-id', data.conversation_id);
         if(showBlink && data.status !== "closed"){
-            this.#changeChatBlinkState(clonedElement.querySelector('.chat_content'));
-            if(this.#activeConversation !== data.conversation_id) this.#audio.play();
+            var blink = false;
+            if(this.#activeConversation !== data.conversation_id){
+                this.#audio.play();
+                blink = true;
+            }
+            this.#changeChatBlinkState(clonedElement.querySelector('.chat_content'), blink);
         }
         const oldChat = document.querySelectorAll('[data-chat-id="' + data.conversation_id + '"]')[0];
         if(oldChat) oldChat.remove();
@@ -278,7 +283,6 @@ class SupportChat {
         this.#supportChannel = pusher.subscribe('support'+agent_id);
         this.#supportChannel.bind('SupportCall', function(data) {
             this.#chatRefresh(data.data, !data.is_support_message);
-            console.log(data);
         }.bind(this));
 
     }

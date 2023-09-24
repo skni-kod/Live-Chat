@@ -18,6 +18,9 @@
             <button type="submit" id="livechat-send-button" style="background-color: {{$chat->chat_color}}">Wyślij</button>
         </form>
     </div>
+    <a id="livechat-expand-btn" href="#">
+        <i class="fa-solid fa-comment"></i>
+    </a>
 </div>
 <template id="message-client">
     <div class="livechat-message">

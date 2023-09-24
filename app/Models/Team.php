@@ -11,12 +11,18 @@ class Team extends Model
 
     protected $fillable = ['app_id', 'team_creator', 'join_code'];
 
-    public function user(){
-        return $this->belongsTo(User::class, 'id');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function members()
     {
         return $this->hasMany(TeamMember::class);
+    }
+
+    public function chatSettings()
+    {
+        return $this->hasOne(ChatSetting::class);
     }
 }

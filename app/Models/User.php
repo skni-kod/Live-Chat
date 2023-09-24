@@ -33,12 +33,12 @@ class User extends Authenticatable
 
     public function team()
     {
-        return $this->belongsTo(Team::class, 'team_members', 'user_id', 'team_id');
+        return $this->belongsTo(Team::class, 'user_id', 'team_id');
     }
 
-    public function teamMembers()
+    public function teamMember()
     {
-        return $this->hasMany(TeamMember::class);
+        return $this->hasOne(TeamMember::class);
     }
 
 }

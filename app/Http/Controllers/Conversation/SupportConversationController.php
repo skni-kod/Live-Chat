@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Conversation;
 
-use App\Http\Controllers\Controller;
-use App\Models\Conversation;
 use App\Models\Visitor;
-use App\Services\ChatService;
-use Illuminate\Http\Request;
+use App\Events\CloseChat;
 use Jenssegers\Agent\Agent;
+use App\Models\Conversation;
+use Illuminate\Http\Request;
+use App\Services\ChatService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -71,6 +72,7 @@ class SupportConversationController extends ConversationController
         if(!filled($request->conversation_id)) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji'], 400);
         if(!$this->conversationExist($request->conversation_id)) return response()->json(['status' => 'error', 'message' => 'Podana konwersacja nie istnieje'], 400);
         $this->setConversationClosedState($request->conversation_id);
+        event(new CloseChat($request->conversation_id));
         return response()->json(['status' => 'ok', 'Konwersacja została zamknięta']);
     }
 

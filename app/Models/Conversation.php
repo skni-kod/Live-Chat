@@ -14,6 +14,8 @@ class Conversation extends Model
         'id' => 'string'
     ];
 
+    protected $keyType = 'string';
+
     //protected $keyType = 'string';
 
 

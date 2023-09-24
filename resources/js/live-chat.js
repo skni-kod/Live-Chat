@@ -55,9 +55,43 @@ export class LiveChat {
         sessionStorage.removeItem('active_conversation_id');
     }
 
+    #clearMessages(){
+        document.querySelector('#chat-messages').innerHTML = '';
+    }
+
+    #closeChat(){
+        this.#changeChatVisibility(false);
+        this.#removeActiveConversation();
+        this.#changeChatState(false);
+        this.#clearMessages();
+    }
+
+    #listenChatClose(){
+        document.querySelector('#livechat-close-btn').addEventListener('click', function(){
+            const visitorId = this.#getVisitorId();
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    visitor_id: visitorId,
+                })
+            };
+            fetch(import.meta.env.VITE_API_ENDPOINT + "/close-conversation", options)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "ok"){
+                    this.#closeChat();
+                    if (this.#channel) this.#channel.unsubscribe();
+                }
+            });
+        }.bind(this));
+    }
+
     #connectConversation(conversationId) {
         this.#setActiveConversationId(conversationId);
-        console.log("connect: ", conversationId);
+
         const pusher = new Pusher(import.meta.env.VITE_PUSHER_APP_KEY, {
             cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER
         });
@@ -66,6 +100,10 @@ export class LiveChat {
         this.#channel.bind('NewChatMessage', function (data) {
             this.#insertMessage(data.message, '', data.is_support_agent);
         }.bind(this));
+
+        this.#channel.bind('CloseChat', function (data) {
+            this.#closeChat();
+        }.bind(this));        
     }
 
     #updateVisits() {
@@ -76,11 +114,11 @@ export class LiveChat {
 
     }
 
+
     #createConversation() {
         const userAgent = navigator.userAgent;
         const visitorId = this.#getVisitorId();
         const numberOfVisits = this.#getNumberOfVisits();
-        console.log(visitorId);
         const options = {
             method: 'POST',
             headers: {
@@ -98,7 +136,10 @@ export class LiveChat {
         fetch(import.meta.env.VITE_API_ENDPOINT + "/create-conversation", options)
             .then(response => response.json())
             .then(data => {
-                if (data.status === "ok") this.#connectConversation(data.conversation_id);
+                if (data.status === "ok"){
+                    this.#connectConversation(data.conversation_id);
+                    this.#changeChatVisibility(true);
+                }
             });
     }
 
@@ -117,13 +158,19 @@ export class LiveChat {
         else this.#connectActiveConversation();
     }
 
+    #scrollMessagesDown(){
+        var div = document.getElementById("chat-messages");
+        div.scrollTop = div.scrollHeight;
+    }
+
     #listenMessageSend() {
         document.querySelector('#livechat-form').addEventListener('submit', function (event) {
             event.preventDefault();
-
+            console.log("wyslalem");
             const visitorId = this.#getVisitorId();
             const numberOfVisits = this.#getNumberOfVisits();
             const message = document.querySelector('#livechat-messagebox').value;
+            document.querySelector('#livechat-messagebox').value = '';
             const options = {
                 method: 'POST',
                 headers: {
@@ -137,16 +184,14 @@ export class LiveChat {
             };
 
             fetch(import.meta.env.VITE_API_ENDPOINT + "/client-message", options)
-                .then(response => response.json())
+                .then(response => {
+                    this.#scrollMessagesDown();
+                })
         }.bind(this));
     }
 
     #changeChatState(isOpened = false) {
         sessionStorage.setItem('chat_opened', isOpened);
-    }
-
-    #closeChat() {
-        this.#changeChatState(false);
     }
 
     #openChat() {
@@ -161,7 +206,7 @@ export class LiveChat {
     }
 
     #listenChatOpen() {
-        document.querySelector('#live_chat').addEventListener('click', this.#openChat.bind(this));
+        document.querySelector('#livechat-expand-btn').addEventListener('click', this.#openChat.bind(this));
     }
 
     #insertMessage(message, sentAt, supportMessage) {
@@ -183,7 +228,22 @@ export class LiveChat {
             if (row.agent_id === null) sentBySupport = false;
             this.#insertMessage(row.message, row.sent_at, sentBySupport);
         });
+        this.#scrollMessagesDown();
 
+    }
+
+    #changeChatVisibility(state){
+        var openButton = document.querySelector('#livechat-expand-btn');
+        console.log(openButton);
+        var selector = document.querySelector('.livechat-container').classList;
+        if(state){
+            selector.add('expanded');
+            openButton.style.display = "none";
+        }
+        else{
+            selector.remove('expanded'); 
+            openButton.style.display = "block";
+        }
     }
 
     #insertChat(data) {
@@ -195,14 +255,17 @@ export class LiveChat {
         if (!document.body) document.body = document.createElement("body");
         head.appendChild(link);
         document.body.insertAdjacentHTML("beforeend", data.data.chat_html);
+        if (!this.#isChatOpened()) this.#changeChatVisibility(false);
+        else this.#changeChatVisibility(true);
+        this.#listenChatOpen();
         this.#insertMessages(data.data.messages);
-
+        this.#listenChatClose();
     }
 
     #loadConversation() {
         const visitorId = this.#getVisitorId();
         let visited = 0;
-        if(this.#alreadyVisited()) visited = 1;
+        if (this.#alreadyVisited()) visited = 1;
         const options = {
             method: 'POST',
             headers: {
@@ -241,7 +304,6 @@ export class LiveChat {
 
     #listenEvents() {
         this.#listenPageLoad();
-        this.#listenChatOpen();
     }
 
     constructor(appId, variables = {}) {

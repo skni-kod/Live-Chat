@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Conversation;
 
-use App\Http\Controllers\Controller;
-use App\Models\Conversation;
-use App\Models\Visitor;
 use App\Models\Team;
-use App\Services\ChatService;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
 use Ramsey\Uuid\Uuid;
-use Stevebauman\Location\Facades\Location;
+use App\Models\Visitor;
+use App\Events\CloseChat;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
+use App\Models\Conversation;
+use Illuminate\Http\Request;
+use App\Services\ChatService;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
+use Stevebauman\Location\Facades\Location;
 
 class ClientConversationController extends ConversationController
 {
@@ -21,23 +22,25 @@ class ClientConversationController extends ConversationController
         if (!$request->filled('user_id', 'app_id', 'user_data')) return false;
     }
 
-    private function createVisitorid(){
-        do{
+    private function createVisitorid()
+    {
+        do {
             $visitorId = Str::random(12);
-        } while($this->visitorExist($visitorId));
+        } while ($this->visitorExist($visitorId));
         return $visitorId;
     }
 
     private function updateVisitorData($data, $visitorId, $isNewVisit = false)
     {
         Visitor::updateOrCreate(['visitor_id' => $visitorId], ['ip' => $data['ip'], 'city' => $data['city'], 'country' => $data['country'], 'system' => $data['system'], 'browser' => $data['browser'], 'browser_version' => $data['browser_version'], 'chats' => 0]);
-        if($isNewVisit) Visitor::where('visitor_id', $visitorId)->increment('visits');
+        if ($isNewVisit) Visitor::where('visitor_id', $visitorId)->increment('visits');
     }
 
-    private function visitorExist($visitorId){
-        if(empty($visitorId)) return false;
+    private function visitorExist($visitorId)
+    {
+        if (empty($visitorId)) return false;
         $visitor = Visitor::where('visitor_id', $visitorId)->first();
-        if($visitor) return true;
+        if ($visitor) return true;
         return false;
     }
 
@@ -56,13 +59,15 @@ class ClientConversationController extends ConversationController
         return [];
     }
 
-    private function appIdExist($appId){
+    private function appIdExist($appId)
+    {
         return Team::where('app_id', '=', $appId)->exists();
     }
 
-    private function validateConversationLoading($request, $appId){
-        if(!$request->has('visitor_id') || !$request->has('visited')) return response()->json(['status' => 'error', 'Wystąpił błąd podczas ładowania chatu']);
-        if(empty($appId) || !$this->appIdExist($appId)) return response()->json(['status' => 'error', 'Niepoprawne ID chatu']);
+    private function validateConversationLoading($request, $appId)
+    {
+        if (!$request->has('visitor_id') || !$request->has('visited')) return response()->json(['status' => 'error', 'Wystąpił błąd podczas ładowania chatu']);
+        if (empty($appId) || !$this->appIdExist($appId)) return response()->json(['status' => 'error', 'Niepoprawne ID chatu']);
     }
 
     public function loadBaseConversation(Request $request, $appId)
@@ -86,10 +91,10 @@ class ClientConversationController extends ConversationController
             'browser_version' => $version,
         ];
 
-        if($request->input('visited') == 0) $isNewVisit = true;
+        if ($request->input('visited') == 0) $isNewVisit = true;
         else $isNewVisit = false;
 
-        if(!$this->visitorExist($visitorId)) $visitorId = $this->createVisitorid();
+        if (!$this->visitorExist($visitorId)) $visitorId = $this->createVisitorid();
         $this->updateVisitorData($data, $visitorId, $isNewVisit);
         $messages = $this->loadConversationMessages($visitorId);
         $chatService = new ChatService();
@@ -103,12 +108,12 @@ class ClientConversationController extends ConversationController
         return response()->json($response);
     }
 
-    private function validateSendMessage($request){
-        if(!$request->has('visitor_id') || !$request->has('message') || !$request->has('app_id')) return response()->json(['status' => 'error', 'message' => 'Wszystkie pola są wymagane']);
-        if(!$this->appIdExist($request->input('app_id'))) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji']);
-        if(!$this->visitorExist($request->input('visitor_id'))) return response()->json(['status' => 'error', 'message' => 'Niepoprawny ID klienta. Odśwież stronę i spróbuj ponownie']);
-        if(strlen($request->input('message')) > config('conversation.message_max_length') || strlen($request->input('message')) == 0) return response()->json(['statu' => 'error', 'message' => 'Niepoprawna długość wiadomości']);
-
+    private function validateSendMessage($request)
+    {
+        if (!$request->has('visitor_id') || !$request->has('message') || !$request->has('app_id')) return response()->json(['status' => 'error', 'message' => 'Wszystkie pola są wymagane']);
+        if (!$this->appIdExist($request->input('app_id'))) return response()->json(['status' => 'error', 'message' => 'Niepoprawne ID konwersacji']);
+        if (!$this->visitorExist($request->input('visitor_id'))) return response()->json(['status' => 'error', 'message' => 'Niepoprawny ID klienta. Odśwież stronę i spróbuj ponownie']);
+        if (strlen($request->input('message')) > config('conversation.message_max_length') || strlen($request->input('message')) == 0) return response()->json(['statu' => 'error', 'message' => 'Niepoprawna długość wiadomości']);
     }
 
     public function sendMessage(Request $request)
@@ -123,18 +128,29 @@ class ClientConversationController extends ConversationController
     public function createConversation(Request $request)
     {
         $visitorId = $request->input('visitor_id');
-        if(!$this->visitorExist($visitorId)) return response()->json(['status' => 'error', 'message' => 'Nieprawidłowy identyfikator użytkownika'], 400);
+        if (!$this->visitorExist($visitorId)) return response()->json(['status' => 'error', 'message' => 'Nieprawidłowy identyfikator użytkownika'], 400);
 
-        try{
+        try {
             $id = Uuid::uuid4();
             Conversation::create(['id' => $id, 'app_id' => $request->input('app_id'), 'visitor_id' => $visitorId, 'agent_id' => null, 'status' => 'created']);
-        } catch(QueryException $e){
+        } catch (QueryException $e) {
             return response()->json(['status' => 'error', 'message' => 'Nie udało się utworzyć konwersacji'], 400);
         }
 
         return response()->json(['status' => 'ok', 'conversation_id' => $id]);
     }
 
-
+    public function closeConversation(Request $request)
+    {
+        $visitorId = $request->input('visitor_id');
+        if (!$this->visitorExist($visitorId)) return response()->json(['status' => 'error', 'message' => 'Nieprawidłowy identyfikator użytkownika'], 400);
+        $activeConversation = $this->getVisitorActiveConversation($visitorId);
+        if(!empty($activeConversation)){
+            Conversation::where('id', $activeConversation['id'])->update(['status' => 'closed']);
+            $chatService = new ChatService;
+            $chatService->supportChatsRefresh($activeConversation['id'], false);
+            return response()->json(['status' => 'ok']);
+        }
+        return response()->json(['status' => 'error', 'message' => 'Podana kowersacja nie istnieje'], 400);
+    }
 }
-

@@ -12,4 +12,8 @@ class TeamMember extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['user_id', 'team_id', 'edit_chat_settings'];
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 }

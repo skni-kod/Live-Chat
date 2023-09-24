@@ -45,11 +45,6 @@ Route::post('/team/remove', [App\Http\Controllers\TeamController::class, 'remove
 Route::post('/teams/generate-code', [App\Http\Controllers\TeamController::class, 'generateCode'])->middleware('auth')->name('team.generatecode');
 Route::post('/teams/join', [App\Http\Controllers\TeamController::class, 'join'])->middleware('auth')->name('teams.join');
 
-Route::prefix('chat')->group(function () {
-    Route::get('settings', [ChatSettingsController::class, 'edit'])->name('chat-settings.edit');
-    Route::put('settings', [ChatSettingsController::class, 'updateSettings'])->name('chat-settings.update');
-});
-
 Route::get('/get-conversations', [App\Http\Controllers\Conversation\SupportConversationController::class, 'getFullConversationList'])->middleware('auth');
 Route::post('/support-chat-open', [App\Http\Controllers\Conversation\SupportConversationController::class, 'joinConversation'])->middleware('auth');
 Route::post('/support-message', [App\Http\Controllers\Conversation\SupportConversationController::class, 'sendMessage'])->middleware('auth');

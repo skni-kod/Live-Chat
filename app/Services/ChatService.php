@@ -2,16 +2,22 @@
 
 namespace App\Services;
 
-use App\Events\SupportCall;
-use App\Models\Team;
-use App\Models\TeamMember;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use App\Models\Chat;
+use App\Models\Team;
+use App\Models\User;
+use App\Models\TeamMember;
+use App\Events\SupportCall;
+use App\Models\ChatSetting;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ChatService{
 
     public function getChatSettings($userId){
+        $userTeam = User::find($userId)->teamMember->team;
+        
+        return $userTeam->chatSettings;
+        /*
         return DB::table('chat_settings')
             ->where('team_id', '=', function ($query) use ($userId) {
                 $query->select('team_id')
@@ -19,6 +25,7 @@ class ChatService{
                     ->where('user_id', '=', $userId);
             })
             ->first();
+        */
     }
 
     public function getChatSettingsByAppid($appId){
@@ -65,6 +72,7 @@ class ChatService{
     }
 
     public static function agentConversationExist($userId, $conversationId){
+      
         return DB::table('conversations')
             ->where('app_id', '=', function ($query) use ($userId) {
                 $query->select('app_id')
