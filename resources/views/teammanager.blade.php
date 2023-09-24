@@ -1,10 +1,10 @@
 @extends('layouts.authorized')
 @section('content')
-    <div class="container-fluid py-4">
-        <div class="row justify-content-end">
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body p-3">
+    <div class="container-fluid py-3">
+        <div class="row justify-content-center ">
+            <div class="col-10 ">
+                <div class="card ">
+                    <div class="card-body ">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="d-flex justify-content-center align-items-center">
+                            <div class="d-flex align-items-center">
                                 <button type="button" class="btn btn-primary copy-btn mr-2"
                                         data-clipboard-text="{{ $joinCode }}">Skopiuj kod
                                 </button>
@@ -33,14 +33,14 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <div class="row mt-4 justify-content-center">
-        <div class="mb-4 col-9 ">
-            <div class="card mx-2">
-                <div class="card-header pb-0 p-3">
+
+    <div class="row mt-4 justify-content-center ">
+        <div class="mb-4 col-10 ">
+            <div class="card ">
+                <div class="card-header p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-2">Lista pracowników</h6>
                     </div>
@@ -107,5 +107,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
