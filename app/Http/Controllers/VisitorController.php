@@ -17,7 +17,7 @@ class VisitorController extends Controller
         } else {
             $percentChange = 0;
         }
-        $percentChangeStr = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
+        $percentChangeStr = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '%';
 
         $visitorCountNew = app('App\Http\Controllers\VisitorController')->countNewVisitors()->getData()->count;
         $lastWeekNewCount = app('App\Http\Controllers\VisitorController')->countNewVisitorsLastWeek()->getData()->count;
@@ -26,7 +26,7 @@ class VisitorController extends Controller
         } else {
             $percentChange = 0;
         }
-        $percentChangeStrNew = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '% since last week';
+        $percentChangeStrNew = ($percentChange >= 0 ? '+' : '-') . abs($percentChange) . '%';
 
         return ['visitorCountToday' => $visitorCountToday,
                 'visitorCountNew' => $visitorCountNew,

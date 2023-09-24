@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Events\NewChatMessage;
 
-class MessageController extends Controller
+class nowychMessageController extends Controller
 {
     public function broadcast(Request $request) {
 

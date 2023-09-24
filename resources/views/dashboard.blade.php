@@ -15,12 +15,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Liczba dzisiejszych użytkowników</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $statisticData['visitorCountToday']}}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-sm font-weight-bolder"> Visitor count {{ $statisticData['percentChangeStr'] }}</span>
+                                        <span class="text-sm font-weight-bolder"> {{ $statisticData['percentChangeStr'] }} w porównaniu do popzedniego tygodnia</span>
                                     </p>
                                 </div>
                             </div>
@@ -40,12 +40,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Liczba nowych użytkowników</p>
                                     <h5 class="font-weight-bolder">
                                         {{ $statisticData['visitorCountNew']}}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-sm font-weight-bolder"> New visitors count {{ $statisticData['percentChangeStrNew'] }}</span>
+                                        <span class="text-sm font-weight-bolder"> {{ $statisticData['percentChangeStrNew'] }} w porównaniu do popzedniego tygodnia</span>
                                     </p>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                             <div class="progress-wrapper">
                                 <div class="progress-info">
                                     <div class="progress-percentage">
-                                        <span class="text-sm font-weight-bold">{{$agentsCount[0]}} nowych w ostatnim tygodniu</span>
+                                        <span class="text-sm font-weight-bold">{{$agentsCount[0]}} nowy(ch) w ostatnim tygodniu</span>
                                     </div>
                                 </div>
                             </div>

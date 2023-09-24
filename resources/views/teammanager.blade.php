@@ -9,7 +9,7 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <p class="mb-0 font-weight-bold">Twój kod zespołu:</p>
-                                    <h5 class="font-weight-bolder">
+                                    <h5 class="font-weight-bolder ">
                                         @if ($joinCode)
                                             <samp id="join-code-field">{{ $joinCode }}</samp>
                                         @endif
@@ -20,11 +20,11 @@
                         <div class="row">
                             <div class="d-flex justify-content-center align-items-center">
                                 <button type="button" class="btn btn-primary copy-btn mr-2"
-                                        data-clipboard-text="{{ $joinCode }}">Copy Code
+                                        data-clipboard-text="{{ $joinCode }}">Skopiuj kod
                                 </button>
                                 <form id="generate-code-form" method="POST" action="{{ route('team.generatecode') }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-success new-code-btn ms-4">Generate New Code
+                                    <button type="submit" class="btn btn-success new-code-btn ms-4">Wygeneruj nowy kod
                                     </button>
                                 </form>
                             </div>

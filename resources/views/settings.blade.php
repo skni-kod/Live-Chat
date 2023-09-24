@@ -74,7 +74,7 @@
                                         <textarea class="form-control" name="message_box" aria-label="With textarea">{{ $chat->message_box }}</textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" id="submit-button" onclick="livechatSavePreferences()">Save</button>
+                                <button type="submit" class="btn btn-primary" id="submit-button" onclick="livechatSavePreferences()">Zapisz ustawienia</button>
                             </form>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div id="livechat-close">
                                     <button id="livechat-close-btn">
-                                        X
+                                        x
                                     </button>
                                 </div>
                             </div>
@@ -97,10 +97,10 @@
                                 <div class="livechat-message">
                                     <div class="livechat-outgoing">
                                         <div class="livechat-message-sender-name">
-                                            Tom Cruize
+                                            Jan Kowalski
                                         </div>
                                         <div class="livechat-message-content">
-                                            Spotkanie jutro o 19, pasuje?
+                                            Hej! Spotkamy się jutro o 19?
                                         </div>
                                         <div class="livechat-message-timestamp">
                                             16:20
@@ -110,23 +110,23 @@
                                 <div class="livechat-message">
                                     <div class="livechat-outgoing">
                                         <div class="livechat-message-sender-name">
-                                            Tom Cruize
+                                            Jan Kowalski
                                         </div>
                                         <div class="livechat-message-content">
-                                            Do jutra!
+                                            Planuje zrobić grilla z najbliższymi.
                                         </div>
                                         <div class="livechat-message-timestamp">
-                                            16:23
+                                            16:21
                                         </div>
                                     </div>
                                 </div>
                                 <div class="livechat-message">
                                     <div class="livechat-ingoing">
                                         <div class="livechat-message-sender-name">
-                                            Donald Duck
+                                            Ania Kowalska
                                         </div>
                                         <div class="livechat-message-content">
-                                            Kwak Kwak Kwak Kwak Kwak
+                                            Jasne! Na pewno wpadne!!!
                                         </div>
                                         <div class="livechat-message-timestamp">
                                             16:21
@@ -136,12 +136,10 @@
                                 <div class="livechat-message">
                                     <div class="livechat-outgoing">
                                         <div class="livechat-message-sender-name">
-                                            Tom Cruize
+                                            Jan Kowalski
                                         </div>
                                         <div class="livechat-message-content">
-                                            Jakis przykladowy tekst tu pisze nwm
-                                            Jakis przykladowy tekst tu pisze nwm
-                                            Jakis przykladowy tekst tu pisze nwm
+                                            Świetnie bardzo się cieszę! :)
                                         </div>
                                         <div class="livechat-message-timestamp">
                                             16:23
@@ -151,10 +149,11 @@
                                 <div class="livechat-message">
                                     <div class="livechat-outgoing">
                                         <div class="livechat-message-sender-name">
-                                            Tom Cruize
+                                            Jan Kowalski
                                         </div>
                                         <div class="livechat-message-content">
-                                            Jakis przykladowy tekst tu pisze nwm
+                                            W takim razię do jutra!
+                                            P.S. mieszkam na Cieplińskiego 34
                                         </div>
                                         <div class="livechat-message-timestamp">
                                             16:23
@@ -164,13 +163,13 @@
                                 <div class="livechat-message">
                                     <div class="livechat-ingoing">
                                         <div class="livechat-message-sender-name">
-                                            Donald Duck
+                                            Ania Kowalska
                                         </div>
                                         <div class="livechat-message-content">
-                                            Jakis przykladowy tekst tu pisze nwm
+                                            Okej. Do jutra!
                                         </div>
                                         <div class="livechat-message-timestamp">
-                                            16:23
+                                            16:24
                                         </div>
                                     </div>
                                 </div>
