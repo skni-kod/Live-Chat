@@ -55,19 +55,19 @@ export class LiveChat {
         sessionStorage.removeItem('active_conversation_id');
     }
 
-    #clearMessages(){
+    #clearMessages() {
         document.querySelector('#chat-messages').innerHTML = '';
     }
 
-    #closeChat(){
+    #closeChat() {
         this.#changeChatVisibility(false);
         this.#removeActiveConversation();
         this.#changeChatState(false);
         this.#clearMessages();
     }
 
-    #listenChatClose(){
-        document.querySelector('#livechat-close-btn').addEventListener('click', function(){
+    #listenChatClose() {
+        document.querySelector('#livechat-close-btn').addEventListener('click', function () {
             const visitorId = this.#getVisitorId();
             const options = {
                 method: 'POST',
@@ -79,13 +79,13 @@ export class LiveChat {
                 })
             };
             fetch(import.meta.env.VITE_API_ENDPOINT + "/close-conversation", options)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "ok"){
-                    this.#closeChat();
-                    if (this.#channel) this.#channel.unsubscribe();
-                }
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "ok") {
+                        this.#closeChat();
+                        if (this.#channel) this.#channel.unsubscribe();
+                    }
+                });
         }.bind(this));
     }
 
@@ -103,7 +103,7 @@ export class LiveChat {
 
         this.#channel.bind('CloseChat', function (data) {
             this.#closeChat();
-        }.bind(this));        
+        }.bind(this));
     }
 
     #updateVisits() {
@@ -136,7 +136,7 @@ export class LiveChat {
         fetch(import.meta.env.VITE_API_ENDPOINT + "/create-conversation", options)
             .then(response => response.json())
             .then(data => {
-                if (data.status === "ok"){
+                if (data.status === "ok") {
                     this.#connectConversation(data.conversation_id);
                     this.#changeChatVisibility(true);
                 }
@@ -158,7 +158,7 @@ export class LiveChat {
         else this.#connectActiveConversation();
     }
 
-    #scrollMessagesDown(){
+    #scrollMessagesDown() {
         var div = document.getElementById("chat-messages");
         div.scrollTop = div.scrollHeight;
     }
@@ -232,16 +232,16 @@ export class LiveChat {
 
     }
 
-    #changeChatVisibility(state){
+    #changeChatVisibility(state) {
         var openButton = document.querySelector('#livechat-expand-btn');
         console.log(openButton);
         var selector = document.querySelector('.livechat-container').classList;
-        if(state){
+        if (state) {
             selector.add('expanded');
             openButton.style.display = "none";
         }
-        else{
-            selector.remove('expanded'); 
+        else {
+            selector.remove('expanded');
             openButton.style.display = "block";
         }
     }
@@ -250,6 +250,9 @@ export class LiveChat {
         const link = document.createElement("link");
         link.rel = 'stylesheet';
         link.type = 'text/css';
+        if (data.data.chat_css.startsWith('http://')) {
+            data.data.chat_css = data.data.chat_css.replace(/^http:\/\//i, 'https://');
+        }
         link.href = data.data.chat_css;
         const head = document.head || document.getElementsByTagName("head")[0];
         if (!document.body) document.body = document.createElement("body");
