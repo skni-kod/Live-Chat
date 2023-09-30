@@ -253,6 +253,7 @@ export class LiveChat {
         if (data.data.chat_css.startsWith('http://')) {
             data.data.chat_css = data.data.chat_css.replace(/^http:\/\//i, 'https://');
         }
+        console.log(data.data.chat_css);
         link.href = data.data.chat_css;
         const head = document.head || document.getElementsByTagName("head")[0];
         if (!document.body) document.body = document.createElement("body");
