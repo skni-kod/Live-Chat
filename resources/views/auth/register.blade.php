@@ -4,8 +4,8 @@
     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
         <div class="card ">
             <div class="card-header pb-0 text-start">
-                <h4 class="font-weight-bolder">Sign Up</h4>
-                <p class="mb-0">Enter your login, email and password to sign up</p>
+                <h4 class="font-weight-bolder">Rejestracja</h4>
+                <p class="mb-0">Podaj login, email oraz hasło aby założyć konto</p>
             </div>
             <div class="card-body">
                 <form role="form" method="POST" action="{{ route('register') }}">
@@ -46,7 +46,7 @@
                     <div class="form-check form-check-info text-start">
                         <input name="terms_accept" class="form-check-input @error('terms_accept') is-invalid @enderror" type="checkbox" value="1" id="terms_accept" checked required>
                         <label class="form-check-label" for="terms_accept">
-                            I agree the <a href="{{url('regulations')}}" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                            Akeceptuję <a href="{{url('regulations')}}" class="text-dark font-weight-bolder">regulamin serwisu</a>
                         </label>
                         @error('terms_accept')
                         <span class="invalid-feedback" role="alert">
@@ -55,14 +55,14 @@
                         @enderror
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign up</button>
+                        <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Zarejestruj</button>
                     </div>
                 </form>
             </div>
             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
-                    Already registered ?
-                    <a href="{{url('login')}}" class="text-primary text-gradient font-weight-bold">Sign in</a>
+                    Masz już konto ? 
+                    <a href="{{url('login')}}" class="text-primary text-gradient font-weight-bold">Zaloguj się</a>
                 </p>
             </div>
         </div>

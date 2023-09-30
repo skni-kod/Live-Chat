@@ -67,8 +67,10 @@ class ChatService{
 
     public function supportChatsRefresh($conversationId, $isSupportAgent = false){
         $supportChannels = $this->getSupportChannels($conversationId);
-        $conversationData = $this->getConversations([$conversationId])[0];
-        event(new SupportCall($supportChannels, $conversationData, $isSupportAgent));
+        $conversations = $this->getConversations([$conversationId]);
+        if($conversations->count() > 0){
+            event(new SupportCall($supportChannels, $conversations[0], $isSupportAgent));
+        }
     }
 
     public static function agentConversationExist($userId, $conversationId){
