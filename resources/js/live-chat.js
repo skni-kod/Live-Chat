@@ -191,7 +191,8 @@ export class LiveChat {
     }
 
     #changeChatState(isOpened = false) {
-        sessionStorage.setItem('chat_opened', isOpened);
+        if(!isOpened) sessionStorage.removeItem('chat_opened');
+        else sessionStorage.setItem('chat_opened', isOpened);
     }
 
     #openChat() {
