@@ -70,6 +70,21 @@ class ClientConversationController extends ConversationController
         if (empty($appId) || !$this->appIdExist($appId)) return response()->json(['status' => 'error', 'Niepoprawne ID chatu']);
     }
 
+    private function getIp()
+    {
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
+            if (array_key_exists($key, $_SERVER) === true) {
+                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                    $ip = trim($ip); // just to be safe
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return request()->ip(); // it will return the server IP if the client IP is not found using this method.
+    }
+
     public function loadBaseConversation(Request $request, $appId)
     {
         $this->validateConversationLoading($request, $appId);
@@ -78,7 +93,7 @@ class ClientConversationController extends ConversationController
         $platform = $agent->platform();
         $browser = $agent->browser();
         $version = $agent->version($browser);
-        $ip = $request->getClientIp(true);
+        $ip = $this->getIp();
         //$ip = $request->ip();
         $currentUserInfo = Location::get($ip);
         $city = $currentUserInfo->cityName ?? '';
@@ -146,7 +161,7 @@ class ClientConversationController extends ConversationController
         $visitorId = $request->input('visitor_id');
         if (!$this->visitorExist($visitorId)) return response()->json(['status' => 'error', 'message' => 'Nieprawidłowy identyfikator użytkownika'], 400);
         $activeConversation = $this->getVisitorActiveConversation($visitorId);
-        if(!empty($activeConversation)){
+        if (!empty($activeConversation)) {
             Conversation::where('id', $activeConversation['id'])->update(['status' => 'closed']);
             $chatService = new ChatService;
             $chatService->supportChatsRefresh($activeConversation['id'], false);
