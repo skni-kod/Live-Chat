@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/live-chat.js',
                 'resources/js/support-chat.js',
                 'resources/js/test_usage.js',
+                'resources/js/settings.js'
             ],
             refresh: true,
         }),

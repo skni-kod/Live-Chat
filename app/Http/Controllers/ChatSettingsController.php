@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreChatSettingsRequest;
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use App\Models\ChatSetting;
 use App\Services\ChatService;
 
 class ChatSettingsController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -22,53 +25,48 @@ class ChatSettingsController extends Controller
 
     public function index()
     {
-        $chat = Chat::firstOrCreate([]);
-        return view('settings', compact('chat'));
+        $chatSerive  = new ChatService();
+        $chat = $chatSerive->getChatSettings(auth()->user()->id);
+        return view('settings', ['chat' => $chat]);
     }
 
-    public function store(Request $request)
+    public function store(StoreChatSettingsRequest $request)
     {
-        $setting = Chat::firstOrCreate([]);
-
+        $chatSerive  = new ChatService();
         $color = $request->input('chatcoloristic');
-        $side = $request->input('livechat-position-selector');
+        $side = $request->input('chat_position');
         $title = $request->input('chat_title');
         $status = $request->input('status');
         $message_box = $request->input('message_box');
+        $chat = $chatSerive->getChatSettings(auth()->user()->id);
 
-
-        if ($request->filled('color'))
-        {
-            $setting->chat_color = $color;
+        if ($request->filled('chatcoloristic')) {
+            $chat->chat_color = $color;
+        }
+        
+        if ($request->filled('status')) {
+            $chat->message_box = $message_box;
+        }
+        
+        if ($request->filled('chat_title')) {
+            $chat->chat_title = $title;
+        }
+        
+        if ($request->filled('status')) {
+            $chat->status = $status;
+        }
+        
+        if ($request->filled('chat_position')) {
+            $chat->side = $side;
         }
 
-        if ($request->filled('status'))
-        {
-            $setting->message_box = $message_box;
-        }
-
-        if ($request->filled('chat_title'))
-        {
-            $setting->chat_title = $title;
-        }
-
-        if ($request->filled('status'))
-        {
-            $setting->status = $status;
-        }
-
-        if ($request->filled('livechat-position-selector'))
-        {
-            $setting->side = $side;
-        }
-
-
-        $setting->save();
+        $chat->save();
 
         return redirect()->back()->with('success', 'Settings saved successfully.');
     }
 
-    public function savePosition(Request $request) {
+    public function savePosition(Request $request)
+    {
 
         $setting = Chat::firstOrCreate([]);
         $setting->side = $request->input('selected_option');
