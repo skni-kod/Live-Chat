@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
         auth()->user()->profile()->update(['avatar' => $newFileName]);
 
-        //return back()->with('success', 'Avatar uploaded successfully.');
+        return back()->with('success', 'Avatar uploaded successfully.');
     }
 
 
