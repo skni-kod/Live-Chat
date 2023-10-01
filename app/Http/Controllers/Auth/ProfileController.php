@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Models;
 use App\Models\User;
+
 use App\Models\Profile;
 
-use App\Models;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -26,14 +27,16 @@ class ProfileController extends Controller
         $request->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024'
         ]);
-
+        
         $avatar = $request->file('avatar');
-        $avatarName = $avatar->getClientOriginalName();
-        $avatar->storeAs('public/avatars', $avatarName);
+        $randomString = Str::random(32);
+        $extension = $avatar->getClientOriginalExtension();
+        $newFileName = $randomString . '.' . $extension;
+        $avatar->storeAs('public/avatars', $newFileName);
 
-        auth()->user()->profile()->update(['avatar' => $avatarName]);
+        auth()->user()->profile()->update(['avatar' => $newFileName]);
 
-        return back()->with('success', 'Avatar uploaded successfully.');
+        //return back()->with('success', 'Avatar uploaded successfully.');
     }
 
 

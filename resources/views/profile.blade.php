@@ -62,7 +62,7 @@
                     @if ($user->profile->avatar)
                         <div class="row">
                             <div class="col-6 mx-auto">
-                                <img src="{{ asset('img/' . $user->profile->avatar) }}" alt="Image placeholder" class="img-fluid card-img-top">
+                                <img src="{{ asset('storage/avatars/' . $user->profile->avatar) }}" alt="Image placeholder" class="img-fluid card-img-top">
                             </div>
                         </div>
 
