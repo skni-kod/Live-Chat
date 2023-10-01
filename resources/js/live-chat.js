@@ -201,7 +201,7 @@ export class LiveChat {
 
     #isChatOpened() {
         const state = sessionStorage.getItem('chat_opened');
-        if (state === undefined || state === null) return false;
+        if (state === undefined || state === null || state === false) return false;
         return state;
     }
 

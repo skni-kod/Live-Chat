@@ -78,7 +78,8 @@ class ClientConversationController extends ConversationController
         $platform = $agent->platform();
         $browser = $agent->browser();
         $version = $agent->version($browser);
-        $ip = $request->ip();
+        $ip = $request->getClientIp(true);
+        //$ip = $request->ip();
         $currentUserInfo = Location::get($ip);
         $city = $currentUserInfo->cityName ?? '';
         $country = $currentUserInfo->countryName ?? '';
