@@ -10,10 +10,11 @@ class Profile extends Model
     use HasFactory;
 
     protected $table = 'profiles';
-    protected $fillable = [ 'name',
-                            'email',
-                            'avatar',
-                            'user_id'
+    protected $fillable = [ 
+        'name',
+        'email',
+        'avatar',
+        'user_id'
     ];
     public function __construct(array $attributes = [])
     {

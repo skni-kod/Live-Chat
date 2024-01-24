@@ -16,7 +16,6 @@ class nowychMessageController extends Controller
             ], 422);
         }
 
-        // TODO: Sanitize input
 
         event(new NewChatMessage($request->message, $request->user));
 

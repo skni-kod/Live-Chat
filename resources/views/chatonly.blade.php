@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Page Title</title>
-    <script src="../js/livechat-skni.js"></script>
+    <script src="{{asset('js/livechat-skni.js')}}"></script>
 
     <link rel="stylesheet" href="{{asset('css/livechat-skni.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,7 +123,6 @@
     <a id="livechat-expand-btn" onclick="livechatToggleChat()">
         <i class="fa-solid fa-comment"></i>
     </a>
-
     <script src="https://kit.fontawesome.com/dfb9cee77f.js" crossorigin="anonymous"></script>
 
 </body>

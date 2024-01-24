@@ -17,15 +17,6 @@ class ChatService{
         $userTeam = User::find($userId)->teamMember->team;
         
         return $userTeam->chatSettings;
-        /*
-        return DB::table('chat_settings')
-            ->where('team_id', '=', function ($query) use ($userId) {
-                $query->select('team_id')
-                    ->from('team_members')
-                    ->where('user_id', '=', $userId);
-            })
-            ->first();
-        */
     }
 
     public function getChatSettingsByAppid($appId){

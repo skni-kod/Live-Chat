@@ -7,7 +7,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\Message; // Import your Message model
+use App\Models\Message;
 
 class WebsocketEvent implements ShouldBroadcast
 {
@@ -18,14 +18,12 @@ class WebsocketEvent implements ShouldBroadcast
 
     public function __construct($event, $data)
     {
-        // Insert data into database using Message model
         $message = Message::createMessage(
             json_encode($data),
             1,
             1
         );
 
-        // Set the message data to be broadcasted
         $this->message = $message;
     }
 
